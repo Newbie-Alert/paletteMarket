@@ -1,54 +1,11 @@
-import { useEffect, useState } from 'react'
 import ProductsCard from './ProductsCard'
-import { supabase } from '../../../api/supabase/supabaseClient';
-import { useNavigate } from 'react-router';
+import { ProductsPostType } from '../ProductsType';
 
-type ProductsPost = {
-  id:string,
-  post_user: string,
-  nickname: string,    
-  created_at: string,
-  title: string,
-  contents: string,
-  price: number,
-  count: number, 
-  category: string[],
-  tags: string[], 
-  location: string,
-  dealType: string,
-  like_user: {uid:string, }[],
-  likes: number,
-  quality: string,
-  changable: boolean,
-  exchange_product: string,
-  shipping_cost: boolean,
-  agreement: boolean,
-};
+interface Props {
+  products: ProductsPostType[],
+}
 
-const ProductList = () => {
-
-  const [products, setProducts] = useState<ProductsPost[]>([]);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    getProducts();
-  }, [])
-  
-  // 나중에 필요한 것만 가져오기 ex. select('id, name')
-  const getProducts = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('products')
-        .select('*')
-      if (error) throw error;
-      if (data != null) {
-        setProducts(data);
-      }
-    } catch (error) {
-      alert('예상치 못한 문제가 발생하였습니다. 다시 시도하여 주십시오.')
-    }
-  }
-console.log(products)
+const ProductList = ({products}: Props) => {
 
   return (
     <>
@@ -57,7 +14,6 @@ console.log(products)
           return <ProductsCard product={product}/>
         })}
       </div>
-      <button onClick={()=>{navigate('/productsposts')}}>글쓰기</button>
     </>
   )
 }

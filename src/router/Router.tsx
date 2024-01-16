@@ -29,7 +29,7 @@ const Router = () => {
           <Route path="/community_write" element={<WritePost />} />
           <Route path="/search-results" element={<SearchResults />} />
           <Route path="/chat" element={<ChatRoom />} />
-          <Route path="/community/:id" element={<CommuDetail />} />
+          <Route path="/community/detail/:id" element={<CommuDetail />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -1,27 +1,6 @@
+import { ProductsPostType } from "../ProductsType"
 
-type Product = {
-  id:string,
-  post_user: string,
-  nickname: string,    
-  created_at: string,
-  title: string,
-  contents: string,
-  price: number,
-  count: number, 
-  category: string[],
-  tags: string[], 
-  location: string,
-  dealType: string,
-  like_user: {uid:string, }[],
-  likes: number,
-  quality: string,
-  changable: boolean,
-  exchange_product: string,
-  shipping_cost: boolean,
-  agreement: boolean,
-};
-
-const ProductsCard = ({product}: {product: Product}) => {
+const ProductsCard = ({product}: {product: ProductsPostType}) => {
   const { title, price, quality } = product
 
   return (
