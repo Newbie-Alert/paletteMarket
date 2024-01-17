@@ -1,6 +1,4 @@
-import ProductsImage from '../../components/prducts/ProductsPosts/ProductsImage'
-import ProductsExplanation from '../../components/prducts/ProductsPosts/ProductsExplanation'
-import ProductsPostingButton from '../../components/prducts/ProductsPosts/ProductsPostingButton'
+import ProductsWriteForm from '../../components/prducts/ProductsPosts/ProductsWriteForm'
 
 const ProductsPosts = () => {
   return (
@@ -10,10 +8,8 @@ const ProductsPosts = () => {
         <p style={{marginLeft: '10px'}}>*필수항목</p>
       </div>
       <div style={{marginBottom: '50px'}}>
-        <ProductsImage />
-        <ProductsExplanation />
+        <ProductsWriteForm />
       </div>
-        <ProductsPostingButton />
     </div>
   )
 }

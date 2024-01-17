@@ -1,9 +1,10 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
+import { ChangeEvent, FormEvent, useState } from 'react'
 import { supabase } from '../../../api/supabase/supabaseClient';
-import AddressForm from './AddressForm';
+import AddressBtn from './AddressBtn';
 import { TextRadioValueType } from '../ProductsType';
+import ProductsImage from './ProductsImage';
 
-const producsPostsTextInit: TextRadioValueType = {
+const productsPostsTextInit: TextRadioValueType = {
   title: "",
   contents: "",
   price: 0,
@@ -45,10 +46,10 @@ const quality = [
   },
 ]
 
-const ProductsExplanation = () => {
+const ProductsWriteForm = () => {
 
   // input text, radio value
-  const [textRadioValue, setTextRadioValue] = useState(producsPostsTextInit)
+  const [textRadioValue, setTextRadioValue] = useState(productsPostsTextInit)
   const [titleCount, setTitleCount] = useState(0)
   const [contentsCount, setContentsCount] = useState(0)
   
@@ -67,7 +68,7 @@ const ProductsExplanation = () => {
       setContentsCount(value.length)
     }
     // 디바운싱 적용시켜 input 값 입력마다 렌더링되지 않도록 리팩토링해보기
-    console.log(textRadioValue)
+    // console.log(textRadioValue)
   };
   
   // input checkbox value
@@ -100,8 +101,8 @@ const ProductsExplanation = () => {
   const agreement = agreementCheckedList
 
   // input값이 모두 들어있는 새로운 객체 만들어서 supabase insert
-   const entireProductsPosts = {...textRadioValue, category, agreement}
-   // console.log(entireProductsPosts)
+  const entireProductsPosts = {...textRadioValue, category, agreement}
+  // console.log(entireProductsPosts)
 
   const addPosts = async () => {
     try {
@@ -124,6 +125,7 @@ const ProductsExplanation = () => {
 
   return (
     <form onSubmit={handleOnSubmit}>
+      <ProductsImage />
       <div style={{display: 'flex', flexDirection: 'row', marginBottom: '20px'}}>
         <h2 style={{fontSize: '20px', fontWeight: 'bold', width: '200px'}}>제목*</h2>
         <input type='text' name='title' value={textRadioValue.title} onChange={handleOnChangeTextRadioValue} maxLength={40} placeholder='상품명이 들어간 제목을 입력해주세요' />
@@ -156,9 +158,9 @@ const ProductsExplanation = () => {
       </div>
       <div style={{display: 'flex', flexDirection: 'row', marginBottom: '20px' }}>
         <h2 style={{fontSize: '20px', fontWeight: 'bold', width: '200px'}}>직거래 지역</h2>
-        <AddressForm textRadioValue={textRadioValue} setTextRadioValue={setTextRadioValue} />
-        <input readOnly type='text' name='address' value={textRadioValue.address} onChange={handleOnChangeTextRadioValue} placeholder='주소검색을 이용해주세요.' />
-        <input type='text' name='detailAddress' value={textRadioValue.detailAddress} onChange={handleOnChangeTextRadioValue} placeholder='상세주소를 입력해주세요.' />
+        <AddressBtn textRadioValue={textRadioValue} setTextRadioValue={setTextRadioValue} />
+        <input readOnly type='text' name='address' value={textRadioValue.address} disabled={textRadioValue.deal_type === '택배' || textRadioValue.deal_type === '협의 후 결정'} onChange={handleOnChangeTextRadioValue} placeholder='주소검색을 이용해주세요.' />
+        <input type='text' name='detailAddress' value={textRadioValue.detailAddress} disabled={textRadioValue.deal_type === '택배' || textRadioValue.deal_type === '협의 후 결정'} onChange={handleOnChangeTextRadioValue} placeholder='상세주소를 입력해주세요.' />
       </div>
       <div style={{display: 'flex', flexDirection: 'row', marginBottom: '20px'}}>
         <h2 style={{fontSize: '20px', fontWeight: 'bold', width: '200px'}}>상품상태*</h2>
@@ -216,4 +218,4 @@ const ProductsExplanation = () => {
   )
 }
 
-export default ProductsExplanation
+export default ProductsWriteForm

@@ -7,7 +7,7 @@ interface Props {
   setTextRadioValue: React.Dispatch<React.SetStateAction<TextRadioValueType>>
 }
 
-const AddressForm = ({scriptUrl, textRadioValue, setTextRadioValue}: Props) => {
+const AddressBtn = ({scriptUrl, textRadioValue, setTextRadioValue}: Props) => {
 
   const open = useDaumPostcodePopup(scriptUrl);
 
@@ -43,4 +43,4 @@ const AddressForm = ({scriptUrl, textRadioValue, setTextRadioValue}: Props) => {
   );
 }
 
-export default AddressForm
+export default AddressBtn
