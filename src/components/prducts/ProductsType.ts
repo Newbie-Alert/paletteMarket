@@ -34,6 +34,7 @@ export type ProductsPostType = {
   agreement: boolean,
   like_user: {uid:string, }[],
   likes: number,
+  image_url: string
 };
 
 export interface Props {

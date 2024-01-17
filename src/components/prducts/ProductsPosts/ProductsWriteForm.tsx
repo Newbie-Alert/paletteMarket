@@ -48,6 +48,9 @@ const quality = [
 
 const ProductsWriteForm = () => {
 
+  // image url
+  const [uploadedFileUrl, setUploadedFileUrl]: any = useState([]);
+
   // input text, radio value
   const [textRadioValue, setTextRadioValue] = useState(productsPostsTextInit)
   const [titleCount, setTitleCount] = useState(0)
@@ -96,12 +99,14 @@ const ProductsWriteForm = () => {
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
     }
-
+    
+  // 테이블 컬럼명과 일치하도록 바꾸기
   const category = majorCheckedList
   const agreement = agreementCheckedList
+  const image_url = uploadedFileUrl
 
   // input값이 모두 들어있는 새로운 객체 만들어서 supabase insert
-  const entireProductsPosts = {...textRadioValue, category, agreement}
+  const entireProductsPosts = {...textRadioValue, category, agreement, image_url}
   // console.log(entireProductsPosts)
 
   const addPosts = async () => {
@@ -125,7 +130,7 @@ const ProductsWriteForm = () => {
 
   return (
     <form onSubmit={handleOnSubmit}>
-      <ProductsImage />
+      <ProductsImage uploadedFileUrl={uploadedFileUrl} setUploadedFileUrl={setUploadedFileUrl} />
       <div style={{display: 'flex', flexDirection: 'row', marginBottom: '20px'}}>
         <h2 style={{fontSize: '20px', fontWeight: 'bold', width: '200px'}}>제목*</h2>
         <input type='text' name='title' value={textRadioValue.title} onChange={handleOnChangeTextRadioValue} maxLength={40} placeholder='상품명이 들어간 제목을 입력해주세요' />

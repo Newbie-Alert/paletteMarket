@@ -1,13 +1,12 @@
 import { ProductsPostType } from "../ProductsType"
 
 const ProductsCard = ({product}: {product: ProductsPostType}) => {
-  const { title, price, quality } = product
+  const { title, price, quality, image_url } = product
 
   return (
-    <div style={{padding: '10px', width: '250px', listStyle: 'none', border: '2px solid magenta'}}>
-      <div style={{marginBottom: '10px', width: '230px', height: '230px', backgroundColor: 'pink'}}>
-        <image>
-        </image>
+    <div style={{padding: '10px', width: '250px', listStyle: 'none', border: '2px solid darkgray'}}>
+      <div style={{marginBottom: '10px', width: '230px', height: '230px'}}>
+        {image_url !== null ? <img src={image_url[0]} style={{objectPosition: 'center', objectFit: 'contain', width: '100%', height: '100%'}} /> : <h1></h1>}
       </div>
       <div style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: '10px', marginBottom: '10px'}}>
         {[quality].map(condition =>
