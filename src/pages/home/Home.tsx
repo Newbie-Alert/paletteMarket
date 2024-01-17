@@ -22,7 +22,7 @@ export const fetchData = async (): Promise<{
 }> => {
   try {
     const { data: usedItemsData, error: usedItemsError } = await supabase
-      .from('used_item__board')
+      .from('products')
       .select('*')
       .order('created_at', { ascending: false })
       .limit(5);
@@ -106,7 +106,7 @@ const Home = () => {
     isLoading: usedItemsCountLoading,
     isError: usedItemsCountError
   } = useQuery<UsedItemsCountData>('usedItemsCount', async () => {
-    const count = await supabase.from('used_item__board').select('*');
+    const count = await supabase.from('products').select('*');
     return count;
   });
 

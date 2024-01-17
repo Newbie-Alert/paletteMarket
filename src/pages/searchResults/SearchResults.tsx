@@ -15,7 +15,7 @@ const SearchResults: React.FC = () => {
       try {
         // 중고 게시물 검색
         const { data: usedItemData, error: usedItemError } = await supabase
-          .from('used_item__board')
+          .from('products')
           .select('*')
           .textSearch('title', searchQuery as string);
 
