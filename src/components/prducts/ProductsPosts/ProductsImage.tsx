@@ -22,7 +22,8 @@ const ProductsImage = ({uploadedFileUrl, setUploadedFileUrl}: Props) => {
     }
   };
 
-  if (uploadedFileUrl.length > 12) uploadedFileUrl.pop();
+  if (uploadedFileUrl.length > 12 && files.length > 12) uploadedFileUrl.pop() && files.pop();
+
   const handleAddImages = async (file: File) => {
     try {
       const newFileName = uuid();
