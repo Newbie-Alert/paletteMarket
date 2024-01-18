@@ -3,6 +3,7 @@ import { supabase } from '../../../api/supabase/supabaseClient';
 import AddressBtn from './AddressBtn';
 import { TextRadioValueType } from '../ProductsType';
 import ProductsImage from './ProductsImage';
+import { useNavigate } from 'react-router';
 
 const productsPostsTextInit: TextRadioValueType = {
   title: "",
@@ -19,7 +20,7 @@ const productsPostsTextInit: TextRadioValueType = {
   detailAddress: ""
 }
 
-const major = ['회화', '조소', '판화', '금속공예', '도예', '유리공예', '목공예', '섬유공예', '기타']
+const major = ['전체보기', '회화', '조소', '판화', '금속공예', '도예', '유리공예', '목공예', '섬유공예', '기타']
 const shipping_cost = ['배송비 포함', '배송비 별도']
 const deal_type = ['택배', '직거래', '협의 후 결정']
 const changable = ['가능', '불가능']
@@ -45,8 +46,22 @@ const quality = [
     shape: '기능 이상이나 외관 손상 등으로 수리가 필요해요'
   },
 ]
+const caveat = `
+  불순한 의도는 처벌을 피할 수 없습니다.
+  불순한 의도는 처벌을 피할 수 없습니다.
+  불순한 의도는 처벌을 피할 수 없습니다.
+  불순한 의도는 처벌을 피할 수 없습니다.
+  불순한 의도는 처벌을 피할 수 없습니다.
+  불순한 의도는 처벌을 피할 수 없습니다.
+  불순한 의도는 처벌을 피할 수 없습니다.
+  불순한 의도는 처벌을 피할 수 없습니다.
+  불순한 의도는 처벌을 피할 수 없습니다.
+  불순한 의도는 처벌을 피할 수 없습니다.
+  불순한 의도는 처벌을 피할 수 없습니다.`
 
 const ProductsWriteForm = () => {
+
+  const navigate = useNavigate();
 
   // image url
   const [uploadedFileUrl, setUploadedFileUrl]: any = useState([]);
@@ -122,7 +137,9 @@ const ProductsWriteForm = () => {
       }
       
       if (error) throw error;
-      window.location.reload();
+      // window.location.reload();
+      alert('중고거래 판매글이 등록되었습니다.')
+      navigate('/products')
     } catch (error) {
       alert('예상치 못한 문제가 발생하였습니다. 다시 시도하여 주십시오.')
     }
@@ -202,18 +219,7 @@ const ProductsWriteForm = () => {
         </div>
       </div>
       <div style={{backgroundColor: 'lightgrey', padding: '15px'}}>
-        <p style={{marginBottom: '20px'}}>
-           불순한 의도는 처벌을 피할 수 없습니다.
-           불순한 의도는 처벌을 피할 수 없습니다.
-           불순한 의도는 처벌을 피할 수 없습니다.
-           불순한 의도는 처벌을 피할 수 없습니다.
-           불순한 의도는 처벌을 피할 수 없습니다.
-           불순한 의도는 처벌을 피할 수 없습니다.
-           불순한 의도는 처벌을 피할 수 없습니다.
-           불순한 의도는 처벌을 피할 수 없습니다.
-           불순한 의도는 처벌을 피할 수 없습니다.
-           불순한 의도는 처벌을 피할 수 없습니다.
-           불순한 의도는 처벌을 피할 수 없습니다. </p>
+        <p style={{marginBottom: '20px'}}>{caveat}</p>
         <label htmlFor='agreement'><input type='checkbox' id='agreement' checked={agreementCheckedList} onChange={() => setAgreementCheckedList(!agreementCheckedList)} />동의합니다.</label>
       </div>
       <div style={{display: 'flex', justifyContent: 'flex-end', height: '50px', padding: '15px', gap: '10px'}}>

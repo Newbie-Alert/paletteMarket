@@ -37,7 +37,6 @@ const AddressBtn = ({scriptUrl, textRadioValue, setTextRadioValue}: Props) => {
   /* 최근검색 필요없이 전에 쓴 검색이 그대로 유지되는 방향은? */
   return (
     <div className="adress_find">
-      <button disabled={textRadioValue.deal_type === '택배' || textRadioValue.deal_type === '협의 후 결정'}>최근 지역</button>
       <button disabled={textRadioValue.deal_type === '택배' || textRadioValue.deal_type === '협의 후 결정'} onClick={handleOnClickAddressBtn}>주소 검색</button>
     </div>
   );

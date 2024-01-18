@@ -20,6 +20,8 @@ const Products = () => {
       const { data, error } = await supabase
         .from('products')
         .select('*')
+        .order('created_at', { ascending: false })
+        //.eq('category', ['조소'])
       if (error) throw error;
       if (data != null) {
         setProducts(data);

@@ -47,7 +47,7 @@ const ProductsImage = ({uploadedFileUrl, setUploadedFileUrl}: Props) => {
         return;
       }
       const res = supabase.storage.from('Image').getPublicUrl(data.path);
-      setFiles((prevFiles) => [file, ...prevFiles ]);
+      setFiles((prevFiles) => [file, ...prevFiles]);
       setUploadedFileUrl((prev:any) => [...prev, res.data.publicUrl]);
       // file 객체를 저장하도록 수정
     } catch (error) {
@@ -162,7 +162,7 @@ const ProductsImage = ({uploadedFileUrl, setUploadedFileUrl}: Props) => {
             <button onClick={() => handleDeleteImage(i)} style={{position: 'absolute'}}>X</button>
           </div>
         )}
-        {uploadedFileUrl.length >= 12 ? <></> : <label htmlFor='file' style={{width: '200px', height: '200px', backgroundColor: 'skyblue'}}>
+        {uploadedFileUrl.length >= 12 ? <></> : <label htmlFor='file' style={{textAlign: 'center', lineHeight: '1200%', width: '200px', height: '200px', backgroundColor: 'lightgray'}}>
           <input type='file' id='file' name='file' onChange={handleFiles} multiple hidden />+
         </label>}
       </div>
