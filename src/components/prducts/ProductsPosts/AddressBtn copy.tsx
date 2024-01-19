@@ -7,7 +7,7 @@ interface Props {
   setTextRadioValue: React.Dispatch<React.SetStateAction<TextRadioValueType>>
 }
 
-const AddressForm = ({scriptUrl, textRadioValue, setTextRadioValue}: Props) => {
+const AddressBtn = ({scriptUrl, textRadioValue, setTextRadioValue}: Props) => {
 
   const open = useDaumPostcodePopup(scriptUrl);
 
@@ -25,7 +25,7 @@ const AddressForm = ({scriptUrl, textRadioValue, setTextRadioValue}: Props) => {
       fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
     }
 
-    //주소 값을 상태 값의 adress에 fullAddress로 바꿔 넣기
+    // 입력된 주소 값(fullAddress)을 상태 값의 address에 바꿔 넣기
     setTextRadioValue(prev => ({ ...prev, address: fullAddress }));
   };
 
@@ -37,10 +37,9 @@ const AddressForm = ({scriptUrl, textRadioValue, setTextRadioValue}: Props) => {
   /* 최근검색 필요없이 전에 쓴 검색이 그대로 유지되는 방향은? */
   return (
     <div className="adress_find">
-      <button disabled={textRadioValue.deal_type === '택배' || textRadioValue.deal_type === '협의 후 결정'}>최근 지역</button>
       <button disabled={textRadioValue.deal_type === '택배' || textRadioValue.deal_type === '협의 후 결정'} onClick={handleOnClickAddressBtn}>주소 검색</button>
     </div>
   );
 }
 
-export default AddressForm
+export default AddressBtn

@@ -33,17 +33,18 @@ const CommuDetail: React.FC = () => {
 
     fetchData();
   }, []);
-  const deleteMutation = useMutation(deletePostMutation, {
-    onSuccess: () => {
-      queryClient.invalidateQueries('posts');
-    }
-  });
+
   const queryClient = useQueryClient();
   const {
     data: posts,
     isLoading,
     isError
   } = useQuery(['posts', param.id], () => fetchDetailPost(param.id));
+  const deleteMutation = useMutation(deletePostMutation, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('posts');
+    }
+  });
   if (isLoading) {
     return <div></div>;
   }

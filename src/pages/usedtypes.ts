@@ -25,7 +25,7 @@ export interface UsedItem {
   error: string;
 }
 
-export interface Community {
+export interface Communityy {
   post_id: string;
   post_user: string;
   created_at: Date;

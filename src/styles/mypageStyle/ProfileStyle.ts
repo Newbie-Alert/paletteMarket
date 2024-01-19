@@ -3,8 +3,10 @@ import styled from 'styled-components';
 export const StProfileContainer = styled.div`
   display: flex;
   align-items: center;
-  padding: 2rem 0;
-  background-color: pink;
+  padding: 2rem;
+  margin: 2rem 0;
+  background: #dcffb7;
+  border-radius: 1rem;
 `;
 
 export const StProfileWrapper = styled.div`

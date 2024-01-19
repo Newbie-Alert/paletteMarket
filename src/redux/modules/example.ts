@@ -35,6 +35,6 @@ export const counterSlice = createSlice({
 export const { increment, decrement, incrementByAmount } = counterSlice.actions;
 
 // 컴포넌트에서 countSlice를 가져오고 싶을 때 사용 할 Hook을 export
-export const selectCount = (state: RootState) => state.counter.value;
+//  export const selectCount = (state: RootState) => state.counter.value;
 
 export default counterSlice.reducer;

@@ -2,19 +2,20 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const HeaderContainer = styled.header`
-  height: 200px;
+  width: 1440px;
+  height: 148px;
   display: flex;
   flex-direction: column;
   padding: 10px 20px;
   margin: 0px auto;
-
-  background-color: #f2f2f2;
+  background-color: #131313;
+  border: 3px solid #d9d9d9;
 `;
 
 export const HeaderSection = styled.section`
   display: flex;
   justify-content: space-between;
-  margin: 50px 100px;
+  margin: 30px 100px;
 `;
 export const Logo = styled.div`
   font-size: 30px;
@@ -29,8 +30,11 @@ export const ButtonContainer = styled.div`
 export const Button = styled.button`
   border-radius: 5px;
 `;
-export const UserIcon = styled.button`
-  border-radius: 5px;
+export const UserIcon = styled.img`
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
 `;
 
 export const NavSection = styled.section`
@@ -38,19 +42,16 @@ export const NavSection = styled.section`
   justify-content: space-between;
   margin: 0px 100px;
 `;
-export const NavBar = styled.nav``;
+export const NavBar = styled.nav`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 export const NavButton = styled(Link)`
   text-decoration: none;
   margin-right: 10px;
   cursor: pointer;
-  color: black;
+  color: #f8f8f8;
   font-size: 18px;
 `;
-export const SearchBar = styled.div`
-  width: 488px;
-  height: 37px;
-  border-radius: 19px;
-  padding-left: 10px;
-  font-size: 15px;
-  /* margin-right: 100px; */
-`;
+export const SearchBar = styled.div``;

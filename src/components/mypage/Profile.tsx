@@ -11,44 +11,28 @@ import {
   StUsername
 } from '../../styles/mypageStyle/ProfileStyle';
 import { supabase } from '../../api/supabase/supabaseClient';
+import { v4 as uuidv4 } from 'uuid';
 
-import { useQuery } from 'react-query';
-
-interface User {
-  id: string;
-  username: string;
-  nickname: string;
-  avatar_url: string;
-  email: string;
-}
+import { useQuery, useMutation, useQueryClient } from 'react-query';
+import {
+  getUserProfile,
+  updateUserImage,
+  updateUserNickname
+} from '../../api/supabase/profile';
 
 const Profile = () => {
-  const [userId, setUserId] = useState<string>();
-  const [userData, setUserData] = useState<User[]>([]);
   const [isEditing, setIsEditing] = useState(false);
   const [userNickname, setUserNickname] = useState<string | undefined>();
-  const [profileImage, setProfileImage] = useState<string | undefined>();
+  const [profileImage, setProfileImage] = useState<string | null>();
 
-  // 현재 로그인한 사용자의 정보 가져오기
-  const getCurrentUser = async () => {
-    const {
-      data: { user }
-    } = await supabase.auth.getUser();
+  const userId = localStorage.getItem('userId');
 
-    setUserId(user?.id);
-  };
+  const queryClient = useQueryClient();
 
-  // profile 테이블에서 현재 로그인한 사용자 id 필터
-  const getUserInformation = async () => {
-    let { data: profiles } = await supabase
-      .from('profiles')
-      .select('*')
-      .eq('id', userId);
-
-    if (profiles && profiles.length > 0) {
-      setUserData(profiles);
-    }
-  };
+  const { data: user } = useQuery({
+    queryKey: ['user'],
+    queryFn: () => getUserProfile(userId)
+  });
 
   // profile 수정 버튼
   const editProfileHandler = () => {
@@ -62,65 +46,67 @@ const Profile = () => {
 
   // nickname input onChange
   const onChangeNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
     setUserNickname(e.target.value);
   };
 
-  // profile 저장
-  const saveProfileHandler = async () => {
-    const { data, error } = await supabase
-      .from('profiles')
-      .update({ nickname: userNickname })
-      .eq('id', userId);
+  const { mutate: updateNickname } = useMutation(updateUserNickname, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('user');
+    }
+  });
 
+  const { mutate: updateProfileImage } = useMutation(updateUserImage, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('user');
+    }
+  });
+
+  const clickUpdateProfile = () => {
+    if (userNickname && userId) {
+      updateNickname({
+        nickname: userNickname,
+        id: userId
+      });
+    }
+
+    if (profileImage && userId) {
+      updateProfileImage({
+        avatar_url: profileImage,
+        id: userId
+      });
+    }
     setIsEditing(false);
   };
 
-  // user profile image upload
-  const uploadProfileImageHandler = async (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const uploadProfileImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const baseUrl =
+      'https://kbfbecvacokagdljwtnh.supabase.co/storage/v1/object/public/profiles/';
     if (e.target.files && e.target.files.length > 0) {
       let file = e.target.files[0];
       const { data, error } = await supabase.storage
         .from('profiles')
-        .upload(userId + '/' + userId, file, {
+        .upload(userId + '/' + uuidv4(), file, {
           upsert: true
         });
-      console.log(data);
-    } else {
-      console.error('no file');
+
+      if (data) {
+        setProfileImage(baseUrl + data?.path);
+      } else {
+        console.log(error);
+      }
     }
   };
-
-  // user image save
-  const getImageUrlHandler = async () => {
-    const { data } = await supabase.storage
-      .from('profiles')
-      .getPublicUrl(userId + '/' + userId);
-
-    setProfileImage(data.publicUrl);
-  };
-
-  getImageUrlHandler();
-
-  useEffect(() => {
-    getCurrentUser();
-  }, []);
-
-  useEffect(() => {
-    if (userId) {
-      getUserInformation();
-    }
-  }, [userId]);
 
   return (
-    <StProfileContainer>
-      {userData.map((user) => {
+    <>
+      {user?.map((user) => {
         return (
-          <>
-            <StProfileImage src={profileImage} alt="" />
-            <input type="file" onChange={(e) => uploadProfileImageHandler(e)} />
+          <StProfileContainer key={user.id}>
+            <StProfileImage
+              src={!profileImage ? user.avatar_url : profileImage}
+              alt=""
+            />
+            <input type="file" onChange={(e) => uploadProfileImage(e)} />
 
             <StProfileWrapper key={user.id}>
               <StButtonWrapper>
@@ -136,7 +122,7 @@ const Profile = () => {
                 {isEditing ? (
                   <>
                     <button onClick={cancelEditHandler}>취소</button>
-                    <button onClick={saveProfileHandler}>저장</button>
+                    <button onClick={clickUpdateProfile}>저장</button>
                   </>
                 ) : (
                   <StEditProfileButton onClick={editProfileHandler}>
@@ -148,10 +134,10 @@ const Profile = () => {
               <StUsername>{user.username}</StUsername>
               <StEmail>{user.email}</StEmail>
             </StProfileWrapper>
-          </>
+          </StProfileContainer>
         );
       })}
-    </StProfileContainer>
+    </>
   );
 };
 

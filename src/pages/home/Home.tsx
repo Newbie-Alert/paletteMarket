@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Community, UsedItem } from '../usedtypes';
+import { Communityy, UsedItem } from '../usedtypes';
 import { supabase } from '../../api/supabase/supabaseClient';
 import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
-import Carousel from '../../components/mainpage/Carousel';
-import { count } from 'console';
-import { NullLiteral } from 'typescript';
 import InfiniteCarousel from '../../components/slider/InfiniteCarousel';
 type UsedItemsCountData = {
   count: number | null;
@@ -18,11 +15,11 @@ type UsedItemsCountData = {
 // 중고게시물 및 커뮤니티 게시물 + 사진 받아오는 로직
 export const fetchData = async (): Promise<{
   usedItems: UsedItem[];
-  communityItems: Community[];
+  communityItems: Communityy[];
 }> => {
   try {
     const { data: usedItemsData, error: usedItemsError } = await supabase
-      .from('used_item__board')
+      .from('products')
       .select('*')
       .order('created_at', { ascending: false })
       .limit(5);
@@ -75,38 +72,26 @@ export const fetchData = async (): Promise<{
 const Home = () => {
   const [showScrollButton, setShowScrollButton] = useState(false);
 
-  useEffect(() => {
-    // 스크롤 이벤트
-    const handleScroll = () => {
-      const scrollY = window.scrollY || document.documentElement.scrollTop;
-
-      const isBottom30Percent =
-        scrollY > document.documentElement.clientHeight * 0.7;
-
-      setShowScrollButton(isBottom30Percent);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-  // 상단 스크롤
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
+  // 처음 홈화면이 로딩되었을때 현 사용자의 ID를 가져와 로컬스토리지에 담는 로직 시작 //
+  const getUserId = async () => {
+    const { data, error } = await supabase.auth.getUser();
+    if (data && data.user) {
+      localStorage.setItem('userId', data.user.id);
+    }
   };
 
-  // 전체 데이터 개수를 가져오는 쿼리
+  useEffect(() => {
+    getUserId();
+  }, []);
+  // 처음 홈화면이 로딩되었을때 현 사용자의 ID를 가져와 로컬스토리지에 담는 로직 시작 끝 //
+
+  // 중고게시물 전체 데이터 개수를 가져오는 쿼리
   const {
     data: usedItemsCountData,
     isLoading: usedItemsCountLoading,
     isError: usedItemsCountError
   } = useQuery<UsedItemsCountData>('usedItemsCount', async () => {
-    const count = await supabase.from('used_item__board').select('*');
+    const count = await supabase.from('products').select('*');
     return count;
   });
 
@@ -143,14 +128,14 @@ const Home = () => {
           </div>
           <LinktoProducts to="/products">전체보기</LinktoProducts>
         </div>
-        {showScrollButton && (
+        {/* {showScrollButton && (
           <ScrollToTopButton onClick={scrollToTop}>
             <img
               src={process.env.PUBLIC_URL + '/assets/upbutton.png'}
               alt="상단으로 이동"
             />
           </ScrollToTopButton>
-        )}
+        )} */}
         <SupabaseListContainer>
           {usedItems.map((item) => (
             <TousedItemDetailPage
@@ -206,11 +191,11 @@ const Home = () => {
 export default Home;
 
 const HomeContainer = styled.section`
-  border-top: 1px solid #000;
   display: flex;
+  width: 1440px;
   height: 1870px;
-
   flex-direction: column;
+  margin: 0px auto;
 `;
 
 const CarouselWrapper = styled.div`
@@ -237,25 +222,6 @@ const HomeSection = styled.div`
     margin-left: 10px;
   }
 `;
-const ScrollToTopButton = styled.button`
-  position: fixed;
-  bottom: 100px;
-  right: 10px;
-  padding: 10px;
-  border: none;
-  cursor: pointer;
-  transition: opacity 0.5s;
-  background-color: transparent;
-
-  img {
-    width: 60px;
-    height: 60px;
-  }
-
-  &:hover {
-    opacity: 0.8;
-  }
-`;
 
 const LinktoProducts = styled(Link)`
   text-decoration: none;
@@ -266,7 +232,7 @@ const LinktoProducts = styled(Link)`
 
 const SupabaseListContainer = styled.ul`
   width: 100%;
-  height: 325px;
+  height: 315px;
   display: flex;
   flex-wrap: nowrap;
   margin-top: 20px;
@@ -274,7 +240,7 @@ const SupabaseListContainer = styled.ul`
 const SupabaseList = styled.li`
   flex: 1 0 calc(20% - 20px);
   width: 100%;
-  height: 325px;
+  height: 315px;
   padding: 10px;
   display: flex;
   flex-direction: column;

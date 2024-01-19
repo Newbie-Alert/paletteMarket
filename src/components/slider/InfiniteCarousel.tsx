@@ -78,7 +78,11 @@ export default InfiniteCarousel;
 
 const CarouselContainer = styled.div`
   position: relative;
-  max-width: 100%;
+  width: 1440px;
+  height: 401px;
+  justify-content: center;
+  align-items: center;
+  margin: 0px auto;
   overflow: hidden;
   .dots_custom {
     display: inline-block;

@@ -1,9 +1,11 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
+import { ChangeEvent, FormEvent, useState } from 'react'
 import { supabase } from '../../../api/supabase/supabaseClient';
-import AddressForm from './AddressForm';
+import AddressBtn from './AddressBtn';
 import { TextRadioValueType } from '../ProductsType';
+import ProductsImage from './ProductsImage';
+import { useNavigate } from 'react-router';
 
-const producsPostsTextInit: TextRadioValueType = {
+const productsPostsTextInit: TextRadioValueType = {
   title: "",
   contents: "",
   price: 0,
@@ -18,7 +20,7 @@ const producsPostsTextInit: TextRadioValueType = {
   detailAddress: ""
 }
 
-const major = ['회화', '조소', '판화', '금속공예', '도예', '유리공예', '목공예', '섬유공예', '기타']
+const major = ['전체보기', '회화', '조소', '판화', '금속공예', '도예', '유리공예', '목공예', '섬유공예', '기타']
 const shipping_cost = ['배송비 포함', '배송비 별도']
 const deal_type = ['택배', '직거래', '협의 후 결정']
 const changable = ['가능', '불가능']
@@ -44,11 +46,28 @@ const quality = [
     shape: '기능 이상이나 외관 손상 등으로 수리가 필요해요'
   },
 ]
+const caveat = `
+  불순한 의도는 처벌을 피할 수 없습니다.
+  불순한 의도는 처벌을 피할 수 없습니다.
+  불순한 의도는 처벌을 피할 수 없습니다.
+  불순한 의도는 처벌을 피할 수 없습니다.
+  불순한 의도는 처벌을 피할 수 없습니다.
+  불순한 의도는 처벌을 피할 수 없습니다.
+  불순한 의도는 처벌을 피할 수 없습니다.
+  불순한 의도는 처벌을 피할 수 없습니다.
+  불순한 의도는 처벌을 피할 수 없습니다.
+  불순한 의도는 처벌을 피할 수 없습니다.
+  불순한 의도는 처벌을 피할 수 없습니다.`
 
-const ProductsExplanation = () => {
+const ProductsWriteForm = () => {
+
+  const navigate = useNavigate();
+
+  // image url
+  const [uploadedFileUrl, setUploadedFileUrl]: any = useState([]);
 
   // input text, radio value
-  const [textRadioValue, setTextRadioValue] = useState(producsPostsTextInit)
+  const [textRadioValue, setTextRadioValue] = useState(productsPostsTextInit)
   const [titleCount, setTitleCount] = useState(0)
   const [contentsCount, setContentsCount] = useState(0)
   
@@ -67,7 +86,7 @@ const ProductsExplanation = () => {
       setContentsCount(value.length)
     }
     // 디바운싱 적용시켜 input 값 입력마다 렌더링되지 않도록 리팩토링해보기
-    console.log(textRadioValue)
+    // console.log(textRadioValue)
   };
   
   // input checkbox value
@@ -95,13 +114,15 @@ const ProductsExplanation = () => {
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
     }
-
+    
+  // 테이블 컬럼명과 일치하도록 바꾸기
   const category = majorCheckedList
   const agreement = agreementCheckedList
+  const image_url = uploadedFileUrl
 
   // input값이 모두 들어있는 새로운 객체 만들어서 supabase insert
-   const entireProductsPosts = {...textRadioValue, category, agreement}
-   // console.log(entireProductsPosts)
+  const entireProductsPosts = {...textRadioValue, category, agreement, image_url}
+  // console.log(entireProductsPosts)
 
   const addPosts = async () => {
     try {
@@ -116,7 +137,9 @@ const ProductsExplanation = () => {
       }
       
       if (error) throw error;
-      window.location.reload();
+      // window.location.reload();
+      alert('중고거래 판매글이 등록되었습니다.')
+      navigate('/products')
     } catch (error) {
       alert('예상치 못한 문제가 발생하였습니다. 다시 시도하여 주십시오.')
     }
@@ -124,6 +147,7 @@ const ProductsExplanation = () => {
 
   return (
     <form onSubmit={handleOnSubmit}>
+      <ProductsImage uploadedFileUrl={uploadedFileUrl} setUploadedFileUrl={setUploadedFileUrl} />
       <div style={{display: 'flex', flexDirection: 'row', marginBottom: '20px'}}>
         <h2 style={{fontSize: '20px', fontWeight: 'bold', width: '200px'}}>제목*</h2>
         <input type='text' name='title' value={textRadioValue.title} onChange={handleOnChangeTextRadioValue} maxLength={40} placeholder='상품명이 들어간 제목을 입력해주세요' />
@@ -156,9 +180,9 @@ const ProductsExplanation = () => {
       </div>
       <div style={{display: 'flex', flexDirection: 'row', marginBottom: '20px' }}>
         <h2 style={{fontSize: '20px', fontWeight: 'bold', width: '200px'}}>직거래 지역</h2>
-        <AddressForm textRadioValue={textRadioValue} setTextRadioValue={setTextRadioValue} />
-        <input readOnly type='text' name='address' value={textRadioValue.address} onChange={handleOnChangeTextRadioValue} placeholder='주소검색을 이용해주세요.' />
-        <input type='text' name='detailAddress' value={textRadioValue.detailAddress} onChange={handleOnChangeTextRadioValue} placeholder='상세주소를 입력해주세요.' />
+        <AddressBtn textRadioValue={textRadioValue} setTextRadioValue={setTextRadioValue} />
+        <input readOnly type='text' name='address' value={textRadioValue.address} disabled={textRadioValue.deal_type === '택배' || textRadioValue.deal_type === '협의 후 결정'} onChange={handleOnChangeTextRadioValue} placeholder='주소검색을 이용해주세요.' />
+        <input type='text' name='detailAddress' value={textRadioValue.detailAddress} disabled={textRadioValue.deal_type === '택배' || textRadioValue.deal_type === '협의 후 결정'} onChange={handleOnChangeTextRadioValue} placeholder='상세주소를 입력해주세요.' />
       </div>
       <div style={{display: 'flex', flexDirection: 'row', marginBottom: '20px'}}>
         <h2 style={{fontSize: '20px', fontWeight: 'bold', width: '200px'}}>상품상태*</h2>
@@ -195,18 +219,7 @@ const ProductsExplanation = () => {
         </div>
       </div>
       <div style={{backgroundColor: 'lightgrey', padding: '15px'}}>
-        <p style={{marginBottom: '20px'}}>
-           불순한 의도는 처벌을 피할 수 없습니다.
-           불순한 의도는 처벌을 피할 수 없습니다.
-           불순한 의도는 처벌을 피할 수 없습니다.
-           불순한 의도는 처벌을 피할 수 없습니다.
-           불순한 의도는 처벌을 피할 수 없습니다.
-           불순한 의도는 처벌을 피할 수 없습니다.
-           불순한 의도는 처벌을 피할 수 없습니다.
-           불순한 의도는 처벌을 피할 수 없습니다.
-           불순한 의도는 처벌을 피할 수 없습니다.
-           불순한 의도는 처벌을 피할 수 없습니다.
-           불순한 의도는 처벌을 피할 수 없습니다. </p>
+        <p style={{marginBottom: '20px'}}>{caveat}</p>
         <label htmlFor='agreement'><input type='checkbox' id='agreement' checked={agreementCheckedList} onChange={() => setAgreementCheckedList(!agreementCheckedList)} />동의합니다.</label>
       </div>
       <div style={{display: 'flex', justifyContent: 'flex-end', height: '50px', padding: '15px', gap: '10px'}}>
@@ -216,4 +229,4 @@ const ProductsExplanation = () => {
   )
 }
 
-export default ProductsExplanation
+export default ProductsWriteForm
