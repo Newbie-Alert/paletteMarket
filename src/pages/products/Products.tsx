@@ -30,7 +30,7 @@ const Products = () => {
       alert('예상치 못한 문제가 발생하였습니다. 다시 시도하여 주십시오.')
     }
   }
-console.log(products)
+  // console.log(products)
 
   return (
     <div style={{padding: '20px'}}>

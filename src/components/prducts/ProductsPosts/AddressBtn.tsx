@@ -25,7 +25,7 @@ const AddressBtn = ({scriptUrl, textRadioValue, setTextRadioValue}: Props) => {
       fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
     }
 
-    //주소 값을 상태 값의 adress에 fullAddress로 바꿔 넣기
+    // 입력된 주소 값(fullAddress)을 상태 값의 address에 바꿔 넣기
     setTextRadioValue(prev => ({ ...prev, address: fullAddress }));
   };
 

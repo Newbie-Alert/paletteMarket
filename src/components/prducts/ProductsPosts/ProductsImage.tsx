@@ -50,9 +50,9 @@ const ProductsImage = ({uploadedFileUrl, setUploadedFileUrl}: Props) => {
     setFiles(files.filter((_, index) => index !== id));
   };
 
-  useEffect(() => {
-    console.log(files);
-},[files])
+  // useEffect(() => {
+  //   console.log(files);
+  // },[files])
 
   return (
     <div style={{display: 'flex', flexDirection: 'row', marginBottom: '20px'}}>
@@ -63,7 +63,7 @@ const ProductsImage = ({uploadedFileUrl, setUploadedFileUrl}: Props) => {
       <div style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: '10px'}}>
         {uploadedFileUrl.map((img:string, idx:number) => 
           <div key={idx} style={{ width: '200px', height: '200px', border: '2px solid darkgray', position: 'relative' }}>
-            <img src={img} alt={`${img}-${idx}`}  style={{objectPosition: 'center', objectFit: 'contain', width: '100%', height: '100%'}} />
+            <img src={img} alt={`${img}-${idx}`} style={{objectPosition: 'center', objectFit: 'cover', width: '100%', height: '100%'}} />
             <button onClick={() => handleDeleteImage(idx)} style={{position: 'absolute'}}>X</button>
           </div>
         )}
