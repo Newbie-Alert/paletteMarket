@@ -1,4 +1,3 @@
-import { ImageResize } from 'quill-image-resize-module-ts';
 import React, { useEffect, useRef, useState } from 'react';
 import ReactQuill, { Quill } from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -164,9 +163,7 @@ const Write: React.FC = () => {
       console.log('error', error);
     }
   };
-  useEffect(() => {
-    Quill.register('modules/imageResize', ImageResize);
-  }, []);
+
   // 에디터 설정
   const modules = React.useMemo(
     () => ({
