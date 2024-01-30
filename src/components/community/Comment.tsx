@@ -14,8 +14,11 @@ import {
   ProfileObject
 } from '../../pages/community/model';
 import parseDate from '../../util/getDate';
+
+// TODO: 비즈니스 & UI 분리해보기
 const Comment: React.FC<CommentProps> = ({ userId, paramId, likes }) => {
   const queryClient = useQueryClient();
+  // react-query 혹은 custom hook으로 분리하여 profile 세팅
   useEffect(() => {
     const fetchData = async () => {
       if (userId) {

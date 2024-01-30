@@ -52,27 +52,10 @@ const StAlertCloseBtn = styled(IoIosClose)`
   cursor: pointer;
 `;
 
-const Layout = () => {
+// TODO:
+const useScrollTopBtn = () => {
   const location = useLocation();
   const [showTopbutton, setShowTopButton] = useState(false);
-
-  const [showAlert, setShowAlert] = useState<boolean>(false);
-  const [newAlert, setAlert] = useState<any[]>([]);
-  const [userChatRooms, setUserChatRoom] = useState<string[]>([]);
-  const navi = useNavigate();
-
-  // push알림
-  const [notifications, setNotifications] = useState<any[]>([]);
-
-  const handleHideAlert = () => {
-    setShowAlert(false);
-  };
-
-  const handleClickAlert = () => {
-    navi('/chat');
-    handleHideAlert();
-    setAlert([]);
-  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -102,6 +85,60 @@ const Layout = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, [location.pathname]);
+
+  return { showTopbutton }
+}
+const Layout = () => {
+  const location = useLocation();
+  // const [showTopbutton, setShowTopButton] = useState(false);
+  const { showTopbutton } = useScrollTopBtn();
+
+  const [showAlert, setShowAlert] = useState<boolean>(false);
+  const [newAlert, setAlert] = useState<any[]>([]);
+  const [userChatRooms, setUserChatRoom] = useState<string[]>([]);
+  const navi = useNavigate();
+
+  // push알림
+  const [notifications, setNotifications] = useState<any[]>([]);
+
+  const handleHideAlert = () => {
+    setShowAlert(false);
+  };
+
+  const handleClickAlert = () => {
+    navi('/chat');
+    handleHideAlert();
+    setAlert([]);
+  };
+
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     const scrollY = window.scrollY;
+  //     const windowHeight = window.innerHeight;
+  //     const documentHeight = document.documentElement.scrollHeight;
+  //     const scrollPercentage =
+  //       (scrollY / (documentHeight - windowHeight)) * 100;
+
+  //     if (
+  //       (['/', '/community_write', '/productsposts'].includes(
+  //         location.pathname
+  //       ) &&
+  //         scrollPercentage >= 50) ||
+  //       (['/mypage', '/products', '/community', '/search-results'].includes(
+  //         location.pathname
+  //       ) &&
+  //         scrollY >= 300)
+  //     ) {
+  //       setShowTopButton(true);
+  //     } else {
+  //       setShowTopButton(false);
+  //     }
+  //   };
+  //   window.addEventListener('scroll', handleScroll);
+  //   return () => {
+  //     window.removeEventListener('scroll', handleScroll);
+  //   };
+  // }, [location.pathname]);
 
   // 메세지 실시간 알림 받기
   useEffect(() => {

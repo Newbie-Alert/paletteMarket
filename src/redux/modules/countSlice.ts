@@ -19,6 +19,7 @@ const initialState: CountState = {
   favPosts: []
 };
 
+// TODO: 이름은 왜 count?
 export const countSlice = createSlice({
   name: 'count',
   // `createSlice` will infer the state type from the `initialState` argument

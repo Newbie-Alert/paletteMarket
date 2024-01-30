@@ -13,6 +13,7 @@ import {
 } from '../../../redux/modules/countSlice';
 import Nothing from '../Nothing';
 
+// TODO: react-query 사용하기 & activeTab에 따라 다르게 상품을 가져와야 하는데, 일단 다 들고 오고 시작하여 불필요한 데이터 요청이 너무 많은 상황
 const MyPageItemList: React.FC<ProductCardProps> = ({ activeTab }) => {
   const CARDS_COUNT = 10;
   const containerRef = useRef(null);
@@ -35,6 +36,7 @@ const MyPageItemList: React.FC<ProductCardProps> = ({ activeTab }) => {
 
     if (products && products.length > 0) {
       setMyItems(products);
+      // TODO: useState와 리덕스를 왜 함께 사용하는지?
       dispatch(setMyItem(products));
     }
   };
@@ -74,6 +76,7 @@ const MyPageItemList: React.FC<ProductCardProps> = ({ activeTab }) => {
     getFavoriteProducts();
   }, []);
 
+  // scroll 말고 intersection-observer 사용하여 바닥에 닿을 때를 감지하면 됨
   const onScrollHandler = () => {
     // js script가 동작하고 카드를 감싸는 전체 컨테이너가 바닥에 닿을 때
     if (containerRef.current && typeof window !== 'undefined') {
@@ -105,6 +108,7 @@ const MyPageItemList: React.FC<ProductCardProps> = ({ activeTab }) => {
     return data;
   };
 
+  // TODO: 왜 react-query 안쓰고 직접하는지?
   const loadMoreProducts = async (offset: number) => {
     setIsLoading(true);
     setOffset((prev) => prev + 1);

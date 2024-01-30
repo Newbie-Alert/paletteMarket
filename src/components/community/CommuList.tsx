@@ -36,6 +36,8 @@ const CommuList: React.FC<CommuListProps> = ({
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  // TODO: layout shift를 없애기 위한 Skeleton 만들기
   if (isLoading) {
     // return <SkeletonCommunityCard cards={2} />;
     return <></>;

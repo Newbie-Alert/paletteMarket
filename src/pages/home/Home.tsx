@@ -16,6 +16,14 @@ type UsedItemsCountData = {
   } | null;
 };
 
+
+const getUserId = async () => {
+  const { data, error } = await supabase.auth.getUser();
+  if (data && data.user) {
+    localStorage.setItem('userId', data.user.id);
+  }
+};
+
 const Home = () => {
   const carouselImages: string[] = [
     process.env.PUBLIC_URL + '/assets/carouselmain.png',
@@ -26,12 +34,13 @@ const Home = () => {
   ];
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   // 처음 홈화면이 로딩되었을때 현 사용자의 ID를 가져와 로컬스토리지에 담는 로직 시작 (중감자동무)//
-  const getUserId = async () => {
-    const { data, error } = await supabase.auth.getUser();
-    if (data && data.user) {
-      localStorage.setItem('userId', data.user.id);
-    }
-  };
+  // TODO: 밖으로 뺴기
+  // const getUserId = async () => {
+  //   const { data, error } = await supabase.auth.getUser();
+  //   if (data && data.user) {
+  //     localStorage.setItem('userId', data.user.id);
+  //   }
+  // };
 
   useEffect(() => {
     getUserId();
@@ -46,6 +55,7 @@ const Home = () => {
     isLoading: usedItemsCountLoading,
     isError: usedItemsCountError
   } = useQuery<UsedItemsCountData>('usedItemsCount', async () => {
+    // https://supabase.com/docs/reference/javascript/select -> 숫자만 가져오는 것이 더 좋을 듯. 용량, 네트워크 문제
     const count = await supabase.from('products').select('*');
     return count;
   });
@@ -85,6 +95,7 @@ const Home = () => {
               <FaArrowRight />
             </ProductsLink>
           </ProductsTitle>
+          {/* TODO: 차라리 상품 컴포넌트, 커뮤니티 컴포넌트를 다 나누면 보기 깔끔하지 않을까? 한 페이지에서 모든 것들을 하고 있으니 파악이 힘들 것 같음 */}
           <ProductsListContainer>
             {/* 지금 데이터 6개 가져오고 있는데, 모바일에서는 6개, 웹에서는 5개 보여져야함 */}
             {usedItems.slice(0, isMobile ? 6 : 5).map((item) => (

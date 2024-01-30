@@ -29,6 +29,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   showSearchComp,
   setShowSearchComp
 }) => {
+  // TODO: 굳이 전역 관리를 하는 이유는? SearchBar에서만 사용하는데?
   const { searchQuery } = useSelector((state: RootState) => state.search);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -76,6 +77,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   };
 
   const checkWindowSize = () => {
+    // TODO: 대부분 mobile은 768px 보다 훨씬 작을 것 같네요
     if (window.matchMedia('(max-width:768px)').matches) {
       setIsMobile(true);
     } else {
@@ -83,6 +85,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
     }
   };
 
+  // TODO: dependency array 를 추가하면 안되는지?
   useEffect(() => {
     checkWindowSize();
     window.addEventListener('resize', checkWindowSize);
@@ -153,20 +156,20 @@ const SearchInputContainer = styled.div<MobileProps>`
     z-index: 3000;
     transition: all 0.3s ease;
     ${(props) => {
-      if (props.$position === true) {
-        return css`
+    if (props.$position === true) {
+      return css`
           display: block;
           opacity: 1;
           transform: translateX(0%);
         `;
-      } else {
-        return css`
+    } else {
+      return css`
           display: none;
           opacity: 0;
           transform: translateX(100%);
         `;
-      }
-    }};
+    }
+  }};
     background-color: var(--3-gray);
     padding: 2rem;
   }

@@ -14,7 +14,10 @@ const Tabs = () => {
     { label: '추천한 글', value: count.favPosts }
   ];
 
-  const [toggle, setToggle] = useState<number | null>(0);
+  // TODO: null은 안넣어도 되지 않을까? 
+  // TODO: toggle이 아니라 다른 이름을 지어야할 듯. toggle은 켜고 끄는 스위치같은 느낌
+  // const [toggle, setToggle] = useState<number | null>(0);
+  const [toggle, setToggle] = useState<number>(0);
   const clickToggleTab = (index: number) => {
     setToggle(index);
   };
@@ -45,8 +48,15 @@ const Tabs = () => {
       ) : (
         ''
       )}
+      {/* TODO: 삼항연산자로 만들기 or 더 좋은 방법없나? */}
+      {/* {0 <= toggle && toggle <= 2 ? (
+        <MyPageItemList activeTab={toggle} />
+      ) : (
+        <MyPageCommunityPostList activeTab={toggle} />
+      )} */}
     </>
   );
 };
 
 export default Tabs;
+

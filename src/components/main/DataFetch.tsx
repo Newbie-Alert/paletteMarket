@@ -1,6 +1,7 @@
 import { supabase } from '../../api/supabase/supabaseClient';
 import { UsedItem, Communityy } from '../../pages//home/usedtypes';
 
+// TODO: Promise all 로 바꿀 수 있을 듯
 export const fetchData = async (): Promise<{
   usedItems: UsedItem[];
   communityItems: Communityy[];

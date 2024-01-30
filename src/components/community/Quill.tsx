@@ -29,6 +29,7 @@ const QuillLayout: React.FC<QuillLayoutProps> = ({ content, setContent }) => {
 
         // console.log(fileNewName);
         // file을 서버에 업로드
+        // TODO: 함수로 빼기
         const { data, error } = await supabase.storage
           .from('images')
           .upload(`quill_imgs/${fileNewName}.png`, file);
@@ -93,6 +94,7 @@ const QuillLayout: React.FC<QuillLayoutProps> = ({ content, setContent }) => {
   );
 
   // 툴바에 사용되는 툴 포맷
+  // TODO: 밖으로 뺴기
   const formats = [
     'header',
     'bold',

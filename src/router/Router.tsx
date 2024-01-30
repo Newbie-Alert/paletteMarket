@@ -21,6 +21,7 @@ import { GlobalStyles } from '../styles/GlobalStyle';
 import { useAppSelector } from '../redux/reduxHooks/reduxBase';
 
 const Router = () => {
+  // TODO: useSelector와 useAppSelector의 차이는?
   const { isLogin } = useAppSelector((state) => state.auth);
 
   return (
@@ -28,7 +29,9 @@ const Router = () => {
       <GlobalStyles />
       <Routes>
         <Route element={<Layout />}>
+          {/* TODO: 로그인이 필요한 페이지마다 다 Navigate 사용하기보다 하나로 묶는 것이 좋을 듯 */}
           <Route
+            // TODO: :mode의 역할은?
             path="/login/:mode"
             element={isLogin ? <Navigate to="/" /> : <Login />}
           />
@@ -70,4 +73,50 @@ const Router = () => {
   );
 };
 
-export default Router;
+
+// TODO: 다른 파일로 빼기
+const PrivateRoute = () => {
+  const { isLogin } = useAppSelector((state) => state.auth);
+  if (!isLogin) {
+    // TODO: 왜 url이 login/login인지?
+    return <Navigate to="/login/login" />
+  }
+
+  return <Outlet />
+}
+
+const Router2 = () => {
+  const { isLogin } = useAppSelector((state) => state.auth);
+  return (
+    <BrowserRouter>
+      <GlobalStyles />
+      <Routes>
+        <Route element={<Layout />}>
+          {/* TODO: 로그인이 필요한 페이지마다 다 Navigate 사용하기보다 하나로 묶는 것이 좋을 듯 */}
+          {/* TODO: 얘는 뭔지? */}
+          {/* <Route
+            path="/login/:mode"
+            element={isLogin ? <Navigate to="/" /> : <Login />} /> */}
+          <Route path="/" element={<Home />} />
+          <Route path="/community" element={<CommunityMain />} />
+          <Route path="/products" element={<ProductsList />} />
+          <Route path="/search-results" element={<SearchResults />} />
+          <Route
+            // TODO: :mode의 역할은?
+            path="/login/login"
+            element={isLogin ? <Navigate to="/" /> : <Login />}
+          />
+          <Route element={<PrivateRoute />}>
+            <Route path="/mypage" element={<MyPage />} />
+            <Route path="/products/detail/:id" element={<ProductDetail />} />
+            <Route path="/productsposts" element={<ProductsPosts />} />
+            <Route path="/community_write" element={<WritePost />} />
+            <Route path="/chat" element={<ChatRoom />} />
+            <Route path="/community/detail/:id" element={<CommuDetail />} />
+          </Route>
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  )
+}
+export default Router2;
