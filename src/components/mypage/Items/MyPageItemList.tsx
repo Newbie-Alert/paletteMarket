@@ -16,6 +16,7 @@ import {
   setPurchasedItem
 } from '../../../redux/modules/itemSlice';
 import Nothing from '../Nothing';
+import ProductsCard from '../../prducts/ProductsCard';
 
 const MyPageItemList: React.FC<ProductCardProps> = ({ activeTab }) => {
   const CARDS_COUNT = 10;
@@ -148,80 +149,11 @@ const MyPageItemList: React.FC<ProductCardProps> = ({ activeTab }) => {
 
   return (
     <StCardContainer ref={ref}>
-      {activeTab === 0 &&
-        myItems.map((item) => (
-          <MyPageItemCard
-            key={item.id}
-            id={item.id}
-            image_url={item.image_url}
-            user={item.user}
-            quality={item.quality}
-            title={item.title}
-            price={item.price}
-          />
-        ))}
-
-      {myItems.length === 0 && activeTab !== 1 && activeTab !== 2 && (
-        <Nothing
-          type={'판매하기'}
-          content={`아직 판매중인 물품이 없어요. \n '판매하기'를 눌러 판매를 시작해보세요!`}
-          icon={'/assets/sell.svg'}
-          to={'/productsposts'}
-          show={true}
-        />
+      {myItems && myItems.length > 0 ? (
+        <ProductsCard posts={myItems} />
+      ) : (
+        <p>포스트가 없습니다</p>
       )}
-      {isLoading && <SkeletonProductCard cards={myItems.length} />}
-
-      {activeTab === 1 &&
-        purchasedItems.map((item) => {
-          return (
-            <MyPageItemCard
-              key={item.id}
-              id={item.id}
-              image_url={item.image_url}
-              user={item.user}
-              quality={item.quality}
-              title={item.title}
-              price={item.price}
-            />
-          );
-        })}
-      {purchasedItems.length === 0 && activeTab !== 0 && activeTab !== 2 && (
-        <Nothing
-          type={''}
-          content={`아직 구매하신 물품이 없어요. `}
-          icon={''}
-          to={''}
-          show={false}
-        />
-      )}
-      {isLoading && <SkeletonProductCard cards={purchasedItems.length} />}
-
-      {activeTab === 2 &&
-        favItems.map((item) => {
-          return (
-            <MyPageItemCard
-              id={item.id}
-              image_url={item.image_url}
-              user={item.user}
-              quality={item.quality}
-              title={item.title}
-              price={item.price}
-            />
-          );
-        })}
-
-      {favItems.length === 0 && activeTab !== 0 && activeTab !== 1 && (
-        <Nothing
-          type={''}
-          content={`아직 찜한 물품이 없어요. `}
-          icon={''}
-          to={''}
-          show={false}
-        />
-      )}
-      {isLoading && <SkeletonProductCard cards={10} />}
-      {/* <SkeletonProductCard cards={10} /> */}
     </StCardContainer>
   );
 };
