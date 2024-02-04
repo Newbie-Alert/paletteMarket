@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { FaComment, FaThumbsUp } from 'react-icons/fa';
 
-export const StPostContainer = styled.div<{ list: number | boolean }>`
+export const StPostContainer = styled.div`
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;

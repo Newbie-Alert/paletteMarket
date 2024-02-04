@@ -1,98 +1,74 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { StPostContainer } from '../../../styles/mypageStyle/CommunityCardStyle';
 import 'react-loading-skeleton/dist/skeleton.css';
-import { supabase } from '../../../api/supabase/supabaseClient';
-import { debounce } from 'lodash';
 import SkeletonCommunityCard from '../../skeleton/SkeletonCommunityCard';
-import { Community, CommunityActive } from '../../../api/supabase/community';
+import { CommunityActive } from '../../../api/supabase/community';
 import { MyPageCommunityCard } from './MyPageCommunityCard';
-import { useAppDispatch } from '../../../redux/reduxHooks/reduxBase';
-import { setFavPost, setMyPost } from '../../../redux/modules/itemSlice';
 import Nothing from '../Nothing';
 import { useInView } from 'react-intersection-observer';
+import {
+  getCommunityPosts,
+  getFavCommunityPosts
+} from '../../../api/supabase/mypage';
+import { useInfiniteQuery } from 'react-query';
 
 const MyPageCommunityPostList: React.FC<CommunityActive> = ({ activeTab }) => {
-  const CARDS_COUNT = 10;
-
-  const [isLoading, setIsLoading] = useState(false);
-  const [offset, setOffset] = useState(1);
-  const [communityPosts, setCommunityPosts] = useState<Community[]>([]);
-  const [favCommunityPosts, setFavCommunityPosts] = useState<Community[]>([]);
-  const userId = localStorage.getItem('userId');
-  const { ref, inView, entry } = useInView({
-    threshold: 0
+  const {
+    data: myPost,
+    hasNextPage: hasNextPageMyPost,
+    fetchNextPage: fetchNextPageMyPost,
+    status: statusMyPost
+  } = useInfiniteQuery({
+    queryKey: ['myPost'],
+    queryFn: getCommunityPosts,
+    getNextPageParam: (lastPage, allPages) => {
+      if (lastPage && lastPage.page < lastPage.total_pages) {
+        return lastPage.page + 1;
+      }
+    },
+    select: (data) => {
+      return {
+        pages: data.pages.map((pageData) => pageData.data).flat(),
+        pageParams: data.pageParams
+      };
+    }
   });
 
-  const dispatch = useAppDispatch();
-  const getCurrentUserCommunityPosts = async () => {
-    let { data: communityPosts, error } = await supabase
-      .from('community')
-      .select('*')
-      .eq('post_user', userId)
-      .limit(10);
-
-    if (communityPosts && communityPosts.length > 0) {
-      setCommunityPosts(communityPosts);
-      dispatch(setMyPost(communityPosts));
-    }
-  };
-
-  const getCurrentUserFavCommunityPosts = async () => {
-    let { data: favCommunityPosts, error } = await supabase
-      .from('community')
-      .select('*');
-
-    if (favCommunityPosts && favCommunityPosts.length > 0) {
-      const filteredFavProducts = favCommunityPosts
-        .filter((user) => user.likes_user?.includes(userId))
-        .map((item) => item);
-
-      setFavCommunityPosts(filteredFavProducts);
-      dispatch(setFavPost(filteredFavProducts));
-    }
-  };
-
-  useEffect(() => {
-    getCurrentUserFavCommunityPosts();
-  }, []);
-
-  const fetchCommunityPosts = async (offset: number, limit: number) => {
-    const from = offset * CARDS_COUNT;
-    const to = from + CARDS_COUNT - 1;
-
-    const { data } = await supabase!
-      .from('community')
-      .select('*')
-      .range(from, to)
-      .eq('post_user', userId);
-
-    return data;
-  };
-
-  const loadMorePosts = async (offset: number) => {
-    setIsLoading(true);
-    setOffset((prev) => prev + 1);
-    try {
-      const newPosts = await fetchCommunityPosts(offset, CARDS_COUNT);
-
-      if (newPosts) {
-        setCommunityPosts((prevPosts) => [...prevPosts, ...newPosts]);
+  const {
+    data: myFavPost,
+    hasNextPage: hasNextPageMyFavPost,
+    fetchNextPage: fetchNextPageMyFavPost,
+    status: statusMyFavPost
+  } = useInfiniteQuery({
+    queryKey: ['myFavPost'],
+    queryFn: getFavCommunityPosts,
+    getNextPageParam: (lastPage, allPages) => {
+      if (lastPage && lastPage.page < lastPage.total_pages) {
+        return lastPage.page + 1;
       }
-    } catch (error) {
-      console.error('Error fetching products:', error);
+    },
+    select: (data) => {
+      return {
+        pages: data.pages.map((pageData) => pageData.data).flat(),
+        pageParams: data.pageParams
+      };
     }
+  });
 
-    setIsLoading(false);
-  };
+  const { ref } = useInView({
+    threshold: 0,
+    onChange: (inView) => {
+      if (!inView || !hasNextPageMyPost) return;
+      fetchNextPageMyPost();
+
+      if (!inView || !hasNextPageMyPost) return;
+      fetchNextPageMyPost();
+    }
+  });
 
   useEffect(() => {
-    if (inView) {
-      loadMorePosts(offset);
-    }
-  }, []);
-
-  useEffect(() => {
-    getCurrentUserCommunityPosts();
+    // 처음 랜더링 시 화면이 맨 위에 위치
+    if (window.scrollY !== 0) window.scrollTo(0, 0);
   }, []);
 
   const handleText = (content: string): string => {
@@ -101,12 +77,9 @@ const MyPageCommunityPostList: React.FC<CommunityActive> = ({ activeTab }) => {
   };
 
   return (
-    <StPostContainer
-      ref={ref}
-      list={communityPosts.length === 0 && activeTab === 3 ? true : false}
-    >
+    <StPostContainer ref={ref}>
       {activeTab === 3 &&
-        communityPosts.map((post) => {
+        myPost?.pages.map((post) => {
           return (
             <MyPageCommunityCard
               id={post.id}
@@ -120,19 +93,9 @@ const MyPageCommunityPostList: React.FC<CommunityActive> = ({ activeTab }) => {
             />
           );
         })}
-
-      {communityPosts.length === 0 && activeTab !== 4 && (
-        <Nothing
-          type={'글쓰기'}
-          content={`아직 작성한 글이 없어요.\n커뮤니티에 작업자들과 이야기를 나눠보세요!`}
-          icon={'/assets/write.svg'}
-          to={'/community_write'}
-          show={true}
-        />
-      )}
 
       {activeTab === 4 &&
-        favCommunityPosts.map((post) => {
+        myFavPost?.pages.map((post) => {
           return (
             <MyPageCommunityCard
               id={post.id}
@@ -146,17 +109,6 @@ const MyPageCommunityPostList: React.FC<CommunityActive> = ({ activeTab }) => {
             />
           );
         })}
-      {favCommunityPosts.length === 0 && activeTab !== 3 && (
-        <Nothing
-          type={''}
-          content={`추천하신 글이 없습니다.`}
-          icon={''}
-          to={''}
-          show={false}
-        />
-      )}
-      {isLoading && <SkeletonCommunityCard cards={10} />}
-      {/* <SkeletonCommunityCard cards={10} /> */}
     </StPostContainer>
   );
 };

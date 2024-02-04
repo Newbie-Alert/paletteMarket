@@ -125,3 +125,80 @@ export const getFavoriteItems = async ({ pageParam = 1 }) => {
 
   return favItemsResults;
 };
+
+export const getCommunityPosts = async ({ pageParam = 1 }) => {
+  let myPostResults;
+
+  let { data: communityPosts, error } = await supabase
+    .from('community')
+    .select('*')
+    .explain({ format: 'json', analyze: true });
+
+  if (Array.isArray(communityPosts)) {
+    myPostResults = communityPosts
+      .map((item) => item.Plan)
+      .map((item: any) => item.Plans)
+      .map((item) => item[0])
+      .map((item) => item)[0];
+  }
+
+  const { data } = await supabase
+    .from('community')
+    .select('*')
+    .eq('post_user', userId)
+    .range(
+      (pageParam - 1) * CARDS_PER_SCROLL,
+      pageParam * CARDS_PER_SCROLL - 1
+    );
+
+  const myItemData = {
+    total_length: myPostResults['Actual Rows'],
+    data: data,
+    page: pageParam,
+    total_pages: Math.ceil(myPostResults['Actual Rows'] / CARDS_PER_SCROLL)
+  };
+  if (error) {
+    throw error;
+  }
+
+  return myItemData;
+};
+
+export const getFavCommunityPosts = async ({ pageParam = 1 }) => {
+  let myFavPostResults;
+
+  let { data: favCommunityPosts, error } = await supabase
+    .from('community')
+    .select('*')
+    .explain({ format: 'json', analyze: true });
+
+  if (Array.isArray(favCommunityPosts)) {
+    myFavPostResults = favCommunityPosts
+      .map((item) => item.Plan)
+      .map((item: any) => item.Plans)
+      .map((item) => item[0])
+      .map((item) => item)[0];
+  }
+
+  const { data } = await supabase
+    .from('community')
+    .select('*')
+    .range(
+      (pageParam - 1) * CARDS_PER_SCROLL,
+      pageParam * CARDS_PER_SCROLL - 1
+    );
+
+  if (data && data.length > 0) {
+    const filteredFavProducts = data
+      .filter((user) => user.likes_user?.includes(userId))
+      .map((item) => item);
+    const myFavItemData = {
+      total_length: myFavPostResults['Actual Rows'],
+      data: filteredFavProducts,
+      page: pageParam,
+      total_pages: Math.ceil(myFavPostResults['Actual Rows'] / CARDS_PER_SCROLL)
+    };
+    return (myFavPostResults = myFavItemData);
+  }
+  return myFavPostResults;
+};
