@@ -35,7 +35,7 @@ const Tabs = () => {
         })}
       </StTabsContainer>
 
-      {tab >= 2 ? (
+      {tab > 3 ? (
         <MyPageCommunityPostList activeTab={tab} />
       ) : (
         <MyPageItemList activeTab={tab} />

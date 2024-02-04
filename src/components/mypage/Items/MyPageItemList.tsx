@@ -1,160 +1,132 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect } from 'react';
 import { StCardContainer } from '../../../styles/mypageStyle/ProductCardStyle';
-import { debounce } from 'lodash';
-import { supabase } from '../../../api/supabase/supabaseClient';
 import SkeletonProductCard from '../../skeleton/SkeletonProductCard';
-import { Product, ProductCardProps } from '../../../api/supabase/products';
-import MyPageItemCard from './MyPageItemCard';
-import {
-  useAppDispatch,
-  useAppSelector
-} from '../../../redux/reduxHooks/reduxBase';
+import { ProductCardProps } from '../../../api/supabase/products';
 import { useInView } from 'react-intersection-observer';
-import {
-  setFavItem,
-  setMyItem,
-  setPurchasedItem
-} from '../../../redux/modules/itemSlice';
 import Nothing from '../Nothing';
 import ProductsCard from '../../prducts/ProductsCard';
+import {
+  getFavoriteItems,
+  getMyItems,
+  getPurchasedItems
+} from '../../../api/supabase/mypage';
+import { useInfiniteQuery } from 'react-query';
 
 const MyPageItemList: React.FC<ProductCardProps> = ({ activeTab }) => {
-  const CARDS_COUNT = 10;
-  const [isLoading, setIsLoading] = useState(false);
-  const [offset, setOffset] = useState(1);
-
-  const [myItems, setMyItems] = useState<Product[]>([]);
-  const [purchasedItems, setPurchasedItems] = useState<Product[]>([]);
-  const [favItems, setFavItems] = useState<Product[]>([]);
-
-  const dispatch = useAppDispatch();
-  const userId = localStorage.getItem('userId');
-
-  const getCurrentUserProducts = async () => {
-    let { data: products, error } = await supabase
-      .from('products')
-      .select('*')
-      .eq('post_user_uid', userId)
-      .limit(10);
-
-    if (products && products.length > 0) {
-      setMyItems(products);
-      dispatch(setMyItem(products));
-    }
-  };
-
-  const getPurchasedProducts = async () => {
-    let { data: purchasedProducts, error } = await supabase
-      .from('products')
-      .select('*')
-      .eq('buyer_uid', userId)
-      .limit(10);
-
-    if (purchasedProducts && purchasedProducts.length > 0) {
-      setPurchasedItems(purchasedProducts);
-      dispatch(setPurchasedItem(purchasedProducts));
-    }
-  };
-
-  const getFavoriteProducts = async () => {
-    let { data: favProducts, error } = await supabase
-      .from('products')
-      .select('*');
-
-    if (favProducts && favProducts.length > 0) {
-      const filteredFavProducts = favProducts
-        .filter((product) =>
-          product.like_user?.some(
-            (like: { user_uid: string }) => like.user_uid === userId
-          )
-        )
-        .map((product) => product);
-      dispatch(setFavItem(filteredFavProducts));
-      setFavItems(filteredFavProducts);
-    }
-  };
-
-  useEffect(() => {
-    getFavoriteProducts();
-  }, []);
-
-  const onScrollHandler = () => {
-    // js script가 동작하고 카드를 감싸는 전체 컨테이너가 바닥에 닿을 때
-    // if (inView) {
-    //   const container = containerRef.current;
-    //   const { scrollTop, clientHeight, scrollHeight } = container;
-    //   const isAtBottom = scrollTop + clientHeight <= scrollHeight;
-    //   setIsInView(isAtBottom);
-    // }
-  };
-
-  useEffect(() => {
-    const debouncedScroll = debounce(() => onScrollHandler(), 200);
-    window.addEventListener('scroll', debouncedScroll);
-    return () => {
-      window.removeEventListener('scroll', debouncedScroll);
-    };
-  }, []);
-
-  const fetchProducts = async (offset: number, limit: number) => {
-    const from = offset * CARDS_COUNT;
-    const to = from + CARDS_COUNT - 1;
-
-    const { data } = await supabase!
-      .from('products')
-      .select('*')
-      .range(from, to)
-      .eq('post_user_uid', userId);
-
-    return data;
-  };
-
-  const loadMoreProducts = async (offset: number) => {
-    setIsLoading(true);
-    setOffset((prev) => prev + 1);
-    try {
-      const newProducts = await fetchProducts(offset, CARDS_COUNT);
-
-      if (newProducts) {
-        setMyItems((prevProducts) => [...prevProducts, ...newProducts]);
+  const {
+    data: myItems,
+    hasNextPage: hasNextPageMyItem,
+    fetchNextPage: fetchNextPageMyItem,
+    status: statusMyItem
+  } = useInfiniteQuery({
+    queryKey: ['myItem'],
+    queryFn: getMyItems,
+    getNextPageParam: (lastPage, allPages) => {
+      if (lastPage && lastPage.page < lastPage.total_pages) {
+        return lastPage.page + 1;
       }
-    } catch (error) {
-      console.error('Error fetching products:', error);
+    },
+    select: (data) => {
+      return {
+        pages: data.pages.map((pageData) => pageData.data).flat(),
+        pageParams: data.pageParams
+      };
     }
-
-    setIsLoading(false);
-  };
-
-  useEffect(() => {
-    if (inView) {
-      loadMoreProducts(offset);
-    }
-  }, []);
-
-  useEffect(() => {
-    getCurrentUserProducts();
-  }, []);
-
-  useEffect(() => {
-    getPurchasedProducts();
-  }, []);
-
-  useEffect(() => {
-    getFavoriteProducts();
-  }, []);
-
-  const { ref, inView, entry } = useInView({
-    threshold: 0
   });
 
+  const {
+    data: purchasedItems,
+    hasNextPage: hasNextPagePurchasedItems,
+    fetchNextPage: fetchNextPagePurchasedItems,
+    status: statusPurchasedItems
+  } = useInfiniteQuery({
+    queryKey: ['purchasedItems'],
+    queryFn: getPurchasedItems,
+    getNextPageParam: (lastPage, allPages) => {
+      if (lastPage && lastPage.page < lastPage.total_pages) {
+        return lastPage.page + 1;
+      }
+    },
+    select: (data) => {
+      return {
+        pages: data.pages.map((pageData) => pageData.data).flat(),
+        pageParams: data.pageParams
+      };
+    }
+  });
+
+  const {
+    data: favItems,
+    hasNextPage: hasNextPageFavItems,
+    fetchNextPage: fetchNextPageFavItems,
+    status: statusFavItems
+  } = useInfiniteQuery({
+    queryKey: ['favItems'],
+    queryFn: getFavoriteItems,
+    getNextPageParam: (lastPage, allPages) => {
+      if (lastPage && lastPage.page < lastPage.total_pages) {
+        return lastPage.page + 1;
+      }
+    },
+    select: (data) => {
+      return {
+        pages: data.pages.map((pageData) => pageData?.data).flat(),
+        pageParams: data.pageParams
+      };
+    }
+  });
+
+  const { ref } = useInView({
+    threshold: 0,
+    onChange: (inView) => {
+      if (!inView || !hasNextPageMyItem) return;
+      fetchNextPageMyItem();
+
+      if (!inView || !hasNextPagePurchasedItems) return;
+      fetchNextPagePurchasedItems();
+
+      if (!inView || !hasNextPageFavItems) return;
+      fetchNextPageFavItems();
+    }
+  });
+
+  useEffect(() => {
+    // 처음 랜더링 시 화면이 맨 위에 위치
+    if (window.scrollY !== 0) window.scrollTo(0, 0);
+  }, []);
+
   return (
-    <StCardContainer ref={ref}>
-      {myItems && myItems.length > 0 ? (
-        <ProductsCard posts={myItems} />
-      ) : (
-        <p>포스트가 없습니다</p>
+    <>
+      {activeTab === 0 && (
+        <StCardContainer ref={ref}>
+          {statusMyItem === 'loading' ? (
+            <SkeletonProductCard cards={5} />
+          ) : (
+            <ProductsCard posts={myItems?.pages} />
+          )}
+        </StCardContainer>
       )}
-    </StCardContainer>
+
+      {activeTab === 1 && (
+        <StCardContainer ref={ref}>
+          {statusPurchasedItems === 'loading' ? (
+            <SkeletonProductCard cards={5} />
+          ) : (
+            <ProductsCard posts={purchasedItems?.pages} />
+          )}
+        </StCardContainer>
+      )}
+
+      {activeTab === 2 && (
+        <StCardContainer ref={ref}>
+          {statusFavItems === 'loading' ? (
+            <SkeletonProductCard cards={5} />
+          ) : (
+            <ProductsCard posts={favItems?.pages} />
+          )}
+        </StCardContainer>
+      )}
+    </>
   );
 };
 
