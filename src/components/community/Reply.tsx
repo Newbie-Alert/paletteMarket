@@ -1,4 +1,4 @@
-import React, { FormEvent, useEffect, useState } from 'react';
+import React, { FormEvent, useEffect, useRef, useState } from 'react';
 import { useQuery, useQueryClient } from 'react-query';
 import 'react-quill/dist/quill.snow.css';
 import { supabase } from '../../api/supabase/supabaseClient';
@@ -47,6 +47,7 @@ const Reply: React.FC<CommentProps> = ({
   const [isFocused, setIsFocused] = useState(false);
   const [replyingToComment, setReplyingToComment] =
     useState<ReplyObject | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const { isOpen } = useAppSelector((state) => state.openForm);
   const dispatch = useAppDispatch();
   //유저 데이터 가져오기
@@ -129,7 +130,6 @@ const Reply: React.FC<CommentProps> = ({
       if (
         !window.confirm('좋아요는 로그인 후에 가능합니다. 로그인하시겠습니까?')
       ) {
-        // 사용자가 '아니요'를 선택하면 아무것도 하지 않음
         return;
       }
       navigate('/login');
@@ -219,12 +219,6 @@ const Reply: React.FC<CommentProps> = ({
     if (profile.length > 0) {
       setIsFocused(true);
     } else {
-      if (
-        !window.confirm('댓글은 로그인 후에 가능합니다. 로그인하시겠습니까?')
-      ) {
-        // 사용자가 '아니요'를 선택하면 아무것도 하지 않음
-        return;
-      }
       navigate('/login');
     }
   };
@@ -265,6 +259,7 @@ const Reply: React.FC<CommentProps> = ({
         setAnon={setAnon}
         secret={secret}
         setSecret={setSecret}
+        profile={profile}
       />
 
       <ReplyList

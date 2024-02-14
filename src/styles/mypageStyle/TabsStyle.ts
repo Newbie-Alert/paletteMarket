@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const StTabsContainer = styled.ul`
-  width: 100%;
+  width: 77.5%;
   display: flex;
   cursor: pointer;
   border-radius: 0.8rem;

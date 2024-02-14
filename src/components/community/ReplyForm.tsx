@@ -1,5 +1,5 @@
 import React, { FocusEventHandler } from 'react';
-import { ReplyObject } from '../../pages/community/api/model';
+import { ProfileObject, ReplyObject } from '../../pages/community/api/model';
 import * as St from '../../styles/community/CommentStyle';
 type ReplyFormProps = {
   addComment: any;
@@ -13,6 +13,7 @@ type ReplyFormProps = {
   setAnon: (anon: boolean) => void;
   secret: boolean;
   setSecret: (secret: boolean) => void;
+  profile: ProfileObject[];
 };
 const ReplyForm: React.FC<ReplyFormProps> = ({
   addComment,
@@ -25,7 +26,8 @@ const ReplyForm: React.FC<ReplyFormProps> = ({
   anon,
   setAnon,
   secret,
-  setSecret
+  setSecret,
+  profile
 }) => {
   return (
     <St.Form
@@ -39,14 +41,16 @@ const ReplyForm: React.FC<ReplyFormProps> = ({
           value={comment}
           onChange={(e) => setComment(e.target.value)}
           placeholder={
-            replyingToComment
-              ? replyingToComment.anon
-                ? '익명의 작업자에게 답글 달기...'
-                : `@${
-                    replyingToComment.user.nickname ??
-                    replyingToComment.user.username
-                  }에게 답글 달기...`
-              : '댓글을 입력하세요'
+            profile.length > 0
+              ? replyingToComment
+                ? replyingToComment.anon
+                  ? '익명의 작업자에게 답글 달기...'
+                  : `@${
+                      replyingToComment.user.nickname ??
+                      replyingToComment.user.username
+                    }에게 답글 달기...`
+                : '댓글을 입력하세요'
+              : '로그인 후에 댓글 작성이 가능합니다.'
           }
         />
         <button type="submit">

@@ -3,13 +3,15 @@ import { MdAddAPhoto } from 'react-icons/md';
 import { IoMdSettings } from 'react-icons/io';
 
 export const StProfileContainer = styled.div`
-  width: 100%;
+  width: 77.5%;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   gap: 4rem;
+  margin: 0 auto;
 
   @media screen and (max-width: 768px) {
+    width: 93%;
     padding: 0 1.5rem;
     gap: 2rem;
   }

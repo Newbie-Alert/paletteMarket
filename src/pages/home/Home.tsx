@@ -189,7 +189,6 @@ const Home = () => {
               <FaArrowRight />
             </St.ShowLink>
           </St.TitleWrapper>
-          {/* <ComunityWrapper></ComunityWrapper> */}
           {isLoading ? null : (
             <Suspense fallback={<SkeletonCommunityCard cards={6} />}>
               <CommunityList posts={sortedCommunityResults} />

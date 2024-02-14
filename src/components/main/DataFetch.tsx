@@ -11,7 +11,6 @@ export const fetchData = async (): Promise<{
       .from('products')
       .select('*')
       .order('created_at', { ascending: false });
-    // .limit(6);
 
     const { data: communityItemsData, error: communityItemsError } =
       await supabase
