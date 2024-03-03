@@ -46,7 +46,6 @@ const UserInfo = styled.div`
 const NavToBoard = styled.div`
   display: flex;
   flex-direction: column;
-  //gap: 1.2rem;
   padding-top: 1rem;
 `;
 
@@ -81,7 +80,6 @@ const NavToCommunity = styled(Link)`
 const UserMenu = styled.div`
   cursor: pointer;
   border-top: 1px solid var(--4-gray);
-  //margin-top: 3rem;
   display: flex;
   flex-direction: column;
   gap: 3rem;

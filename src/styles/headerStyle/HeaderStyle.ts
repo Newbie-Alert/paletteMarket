@@ -300,7 +300,7 @@ export const LogoutButton = styled.button`
     ${LogoutWord} {
       color: var(--white);
     }
-    background-color: var(--opc-80);
+    background-color: var(--opc-100);
   }
   @media screen and (max-width: 768px) {
     display: none;

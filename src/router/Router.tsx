@@ -34,7 +34,7 @@ const Router = () => {
   return (
     <BrowserRouter>
       <GlobalStyles />
-      <Suspense fallback={<div>로딩 즁 </div>}>
+      <Suspense fallback={<div>로딩 중 </div>}>
         <Routes>
           <Route element={<Layout />}>
             <Route path="/login" element={<Login />} />

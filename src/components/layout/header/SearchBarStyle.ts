@@ -47,7 +47,8 @@ const SearchInputBar = styled.input`
   height: 3.7rem;
   padding-left: 2rem;
   border-radius: 1.9rem;
-  background: var(--opc-50);
+  background: var(--opc-100);
+  opacity: 0.9;
   border: none;
   color: var(--black);
   font-size: var(--fontSize-H5);

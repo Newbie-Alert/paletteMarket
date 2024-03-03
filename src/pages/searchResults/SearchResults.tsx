@@ -1,5 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import {
+  useLocation,
+  useNavigate,
+  useParams,
+  useSearchParams
+} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import * as St from '../../styles/searchresults/SearchResultsStyle';
 import { setSearchResults } from '../../redux/modules/searchSlice';
@@ -42,6 +47,8 @@ const SearchResults: React.FC = () => {
   };
   const dispatch = useDispatch();
   const location = useLocation();
+
+  console.log(location.state);
   const [isLoading, setIsLoading] = useState(false);
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -66,8 +73,10 @@ const SearchResults: React.FC = () => {
     setClickMenu(sort);
   };
 
-  const newSearchQuery = new URLSearchParams(location.search).get('q') || '';
-
+  const newSearchQuery = new URLSearchParams(location.search).get('q') ?? '';
+  console.log(newSearchQuery);
+  const str = decodeURI(location.search);
+  console.log(str.substring(3));
   const checkWindowSize = () => {
     setIsMobile(window.innerWidth <= 768);
   };

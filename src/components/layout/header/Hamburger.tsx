@@ -7,8 +7,6 @@ import { BiWon } from 'react-icons/bi';
 import { LuPalette } from 'react-icons/lu';
 import { TbLogin, TbLogout } from 'react-icons/tb';
 import { BsChatDotsFill } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 import { supabase } from '../../../api/supabase/supabaseClient';
 import {
   useAppDispatch,

@@ -91,7 +91,9 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       e.preventDefault();
-      navigate(`/search-results?q=${encodeURIComponent(searchQuery)}`);
+      navigate(`/search-results?q=${encodeURIComponent(searchQuery)}`, {
+        state: { searchQuery }
+      });
       handleSearch();
       setShowSearchComp(false);
     }
