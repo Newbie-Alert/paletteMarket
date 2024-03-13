@@ -73,54 +73,55 @@
 
 ## 프로젝트 구조
 
-
+.
 ├── public
 └── src
     ├── App.tsx
     ├── api
-    │   └── supabase
+    │   └── supabase
     ├── components
-    │   ├── chat
-    │   ├── community
-    │   ├── imagePreviewer
-    │   ├── layout
-    │   ├── main
-    │   ├── map
-    │   ├── mypage
-    │   ├── products
-    │   ├── productDetail
-    │   ├── search
-    │   ├── searchResults
-    │   ├── sideBar
-    │   ├── skeleton
-    │   └── slider
+    │   ├── chat
+    │   ├── community
+    │   ├── imagePreviewer
+    │   ├── layout
+    │   ├── main
+    │   ├── map
+    │   ├── mypage
+    │   ├── products
+    │   ├── productDetail
+    │   ├── search
+    │   ├── searchResults
+    │   ├── sideBar
+    │   ├── skeleton
+    │   └── slider
     ├── layouts
-    │   ├── Footer.tsx
-    │   ├── Header copy.tsx
-    │   ├── Header.tsx
-    │   ├── Layout.tsx
-    │   ├── NotificationFn.ts
-    │   ├── PrivateLayout
-    │   └── ScrollTopButton.tsx
+    │   ├── Footer.tsx
+    │   ├── Header copy.tsx
+    │   ├── Header.tsx
+    │   ├── Layout.tsx
+    │   ├── NotificationFn.ts
+    │   ├── PrivateLayout
+    │   └── ScrollTopButton.tsx
     ├── pages
-    │   ├── chat
-    │   ├── community
-    │   ├── home
-    │   ├── login
-    │   ├── mypage
-    │   ├── postersProducts
-    │   ├── products
-    │   ├── productDetail
-    │   └── searchResults
+    │   ├── chat
+    │   ├── community
+    │   ├── home
+    │   ├── login
+    │   ├── mypage
+    │   ├── postersProducts
+    │   ├── products
+    │   ├── productDetail
+    │   └── searchResults
     ├── redux
-    │   ├── modules
-    │   ├── reduxHooks
-    │   └── store
+    │   ├── modules
+    │   ├── reduxHooks
+    │   └── store
     ├── router
     ├── service-worker.ts
     ├── serviceWorkerRegistration.ts
     ├── styles
     └── util
+
 
 <br>
 
