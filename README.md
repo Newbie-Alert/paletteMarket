@@ -12,13 +12,13 @@
 
 ## 팀소개
 
-이하빈: 
+이하빈: https://github.com/Liabinn
 
-이락균: 
+이락균: https://github.com/Newbie-Alert
 
 김건우: https://github.com/doodookim
 
-정혜원: 
+정혜원: https://github.com/hyewon0615
 
 전지현: https://github.com/jihyun-j
 
