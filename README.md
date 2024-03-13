@@ -1,10 +1,10 @@
-# 🎵 Mucation
+# Palette Market
 
 ## Overview
 
-🕗 개발기간: 2023. 12. 4 ~ 2023. 12. 11  
+🕗 개발기간: 2024. 1 ~ 2024. 2  
 
-💻 배포 주소: https://mucation-project.vercel.app
+💻 배포 주소: [https://mucation-project.vercel.app](https://palette-market-gold.vercel.app/)
 
 
 
@@ -12,13 +12,13 @@
 
 ## 팀소개
 
-김범수: 
+이하빈: 
 
-김은비: https://github.com/eunbime
+이락균: 
 
-김명섭: https://github.com/kms99
+김건우: 
 
-시병택: https://github.com/BYEONGTAEK2023
+정혜원: 
 
 전지현: https://github.com/jihyun-j
 
@@ -27,7 +27,7 @@
 ## 프로젝트 소개
 
 <aside>
-🎶 내가 원하는 장소에서 내가 좋아하는 음악(영상)을 공유해 보자!
+미대생 또는 미술을 취미로 하는 사람들이 미술용품을 중고로 거래할 수 있고, 고민, 끌팀 또는 미술을 주제로한 커뮤니티를 형성할 수 있는 커뮤니티
 
 </aside>
 
@@ -45,6 +45,7 @@
 
 <img src="https://img.shields.io/badge/NPM-CB3837?style=for-the-badge&logo=NPM&logoColor=white"/></a>
 <img src="https://img.shields.io/badge/YARN-2C8EBB?style=for-the-badge&logo=Yarn&logoColor=white"/></a>
+![image](https://github.com/Newbie-Alert/paletteMarket/assets/80092348/573cffd0-d11b-4785-a91a-3702e71011aa)
 
 ### Development
 <img src="https://img.shields.io/badge/HTML-E34F26?style=for-the-badge&logo=HTML5&logoColor=white"/></a>
