@@ -45,7 +45,7 @@
 
 <img src="https://img.shields.io/badge/NPM-CB3837?style=for-the-badge&logo=NPM&logoColor=white"/></a>
 <img src="https://img.shields.io/badge/YARN-2C8EBB?style=for-the-badge&logo=Yarn&logoColor=white"/></a>
-![image](https://github.com/Newbie-Alert/paletteMarket/assets/80092348/573cffd0-d11b-4785-a91a-3702e71011aa)
+
 
 ### Development
 <img src="https://img.shields.io/badge/HTML-E34F26?style=for-the-badge&logo=HTML5&logoColor=white"/></a>
@@ -55,11 +55,10 @@
 
 ### Database
 
-<img src="https://img.shields.io/badge/FIREBASE-FFCA28?style=for-the-badge&logo=Firebase&logoColor=black"/></a>  
+![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)
 
 ### API
 
-<img src="https://img.shields.io/badge/YOUTUBE-FF0000?style=for-the-badge&logo=Youtube&logoColor=white"/></a>
 <img src="https://img.shields.io/badge/KAKAO MAP-FFCD00?style=for-the-badge&logo=KaKao&logoColor=black"/></a>  
 
 ### Communication
