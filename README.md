@@ -78,129 +78,21 @@
     ├── App.tsx
     ├── api
     │   └── supabase
-    │       ├── community.ts
-    │       ├── mypageQuery.ts
-    │       ├── products.ts
-    │       ├── profile.ts
-    │       └── supabaseClient.ts
     ├── components
     │   ├── chat
-    │   │   ├── ChatCompStyles.ts
-    │   │   ├── chatMessages
-    │   │   │   ├── ChatMessages.tsx
-    │   │   │   ├── ChatMsg.tsx
-    │   │   │   └── ChatMyMsg.tsx
-    │   │   ├── chatRoom
-    │   │   │   ├── ChatRoomFn.ts
-    │   │   │   ├── ChatRoomList.tsx
-    │   │   │   └── CheckDvice.ts
-    │   │   └── types.ts
     │   ├── community
-    │   │   ├── CategorySeletor.tsx
-    │   │   ├── CommentInput.tsx
-    │   │   ├── CommuFileList.tsx
-    │   │   ├── CommunityList.tsx
-    │   │   ├── CommunityMainCount.tsx
-    │   │   ├── Reply.tsx
-    │   │   ├── ReplyContent.tsx
-    │   │   ├── ReplyForm.tsx
-    │   │   ├── ReplyList.tsx
-    │   │   └── WriteLayout.tsx
     │   ├── imagePreviewer
-    │   │   ├── ImagePreviewFn.ts
-    │   │   ├── ImagePreviewer.tsx
-    │   │   ├── ImagePreviewerStyles.ts
-    │   │   └── ImagePreviewerTypes.tsx
     │   ├── layout
-    │   │   └── header
-    │   │       ├── Hamburger.tsx
-    │   │       ├── HamburgerStyle.ts
-    │   │       ├── SearchBar.tsx
-    │   │       └── SearchBarStyle.ts
     │   ├── main
-    │   │   └── DataFetch.tsx
-    │   ├── mainpage
-    │   │   └── Carousel.tsx
     │   ├── map
-    │   │   ├── MapFn.ts
-    │   │   ├── MapStyles.ts
-    │   │   ├── MapTypes.ts
-    │   │   └── Maps.tsx
     │   ├── mypage
-    │   │   ├── Commnity
-    │   │   │   ├── MyPageCommuCard.tsx
-    │   │   │   ├── MyPageCommuList.tsx
-    │   │   │   └── MyPageCommunityPostList.tsx
-    │   │   ├── Items
-    │   │   │   └── MyPageItemList.tsx
-    │   │   ├── Nothing.tsx
-    │   │   ├── Profile
-    │   │   │   ├── Profile.tsx
-    │   │   │   ├── ProfileMobileNav.tsx
-    │   │   │   └── QnAFrom.tsx
-    │   │   └── Tabs
-    │   │       └── Tabs.tsx
     │   ├── prducts
-    │   │   ├── ProductsCard.tsx
-    │   │   ├── ProductsList
-    │   │   │   ├── PostsNothing.tsx
-    │   │   │   ├── ProductCategory.tsx
-    │   │   │   ├── ProductsListCard.tsx
-    │   │   │   └── ProductsSortBtn.tsx
-    │   │   ├── ProductsPosts
-    │   │   │   ├── AddressBtn.tsx
-    │   │   │   ├── ProductsImage.tsx
-    │   │   │   └── ProductsWriteForm.tsx
-    │   │   ├── ProductsSetData.ts
-    │   │   ├── ProductsType.ts
-    │   │   └── productsQuery.ts
     │   ├── productDetail
-    │   │   ├── DetailInfo
-    │   │   │   ├── ProductDetailInfo.tsx
-    │   │   │   ├── ProductDetailInfoHeader.tsx
-    │   │   │   └── styles.ts
-    │   │   ├── ImageViewer.tsx
-    │   │   ├── ProductDetailFn.ts
-    │   │   ├── ProductDetailStyles.ts
-    │   │   ├── ProductDetailTypes.ts
-    │   │   ├── chatList
-    │   │   │   ├── ChatListTypes.ts
-    │   │   │   ├── ProductChatList.tsx
-    │   │   │   └── detailBody
-    │   │   │       ├── ProductButton.tsx
-    │   │   │       ├── ProductDetailBody.tsx
-    │   │   │       ├── ProductPriceWrapper.tsx
-    │   │   │       ├── Recommend.tsx
-    │   │   │       └── RecommendStyle.ts
-    │   │   ├── customToast
-    │   │   │   ├── CustomToast.tsx
-    │   │   │   ├── CustomToastError.tsx
-    │   │   │   └── CustomToastSuccess.tsx
-    │   │   ├── detailCarousel
-    │   │   │   ├── DetailCarousel.tsx
-    │   │   │   ├── DetailCarouselStyle.ts
-    │   │   │   └── ProductDetailCarousel.tsx
-    │   │   └── infoStyle.ts
     │   ├── search
-    │   │   └── CreatedTime.tsx
     │   ├── searchResults
     │   ├── sideBar
-    │   │   ├── SideBar.tsx
-    │   │   ├── SideBarFn.tsx
-    │   │   ├── SideBarStyles.ts
-    │   │   ├── SideBarTypes.ts
-    │   │   ├── noti
-    │   │   │   └── NotiRender.tsx
-    │   │   └── sideBarRender
-    │   │       └── SideBarRender.tsx
     │   ├── skeleton
-    │   │   ├── ProductsSkeleton.tsx
-    │   │   ├── SkeletonCommunityCard.tsx
-    │   │   ├── SkeletonCommunityDetail.tsx
-    │   │   └── SkeletonProductCard.tsx
     │   └── slider
-    │       └── InfiniteCarousel.tsx
-    ├── index.tsx
     ├── layouts
     │   ├── Footer.tsx
     │   ├── Header copy.tsx
@@ -208,123 +100,26 @@
     │   ├── Layout.tsx
     │   ├── NotificationFn.ts
     │   ├── PrivateLayout
-    │   │   └── PrivateLayout.tsx
     │   └── ScrollTopButton.tsx
     ├── pages
     │   ├── chat
-    │   │   ├── ChatRoom.tsx
-    │   │   ├── chatForm
-    │   │   │   └── ChatForm.tsx
-    │   │   ├── chatHeader
-    │   │   │   ├── ChatHeader.tsx
-    │   │   │   └── ChatHeaderType.ts
-    │   │   ├── chat_utils
-    │   │   │   ├── functions.ts
-    │   │   │   └── inputClass.ts
-    │   │   ├── style.ts
-    │   │   └── supabaseChat
-    │   │       └── supabase_chat.ts
     │   ├── community
-    │   │   ├── CommuDetail.tsx
-    │   │   ├── CommunityMain.tsx
-    │   │   ├── WritePost.tsx
-    │   │   ├── api
-    │   │   │   ├── ReplyQuery.ts
-    │   │   │   ├── commuQuery.ts
-    │   │   │   ├── fileUploader.ts
-    │   │   │   ├── imgaeUploader.ts
-    │   │   │   └── model.ts
-    │   │   └── hook
-    │   │       └── useQuery.ts
     │   ├── home
-    │   │   │
-    │   │   ├── Home.tsx
-    │   │   └── usedtypes.ts
     │   ├── login
-    │   │   └── Login.tsx
     │   ├── mypage
-    │   │   └── MyPage.tsx
     │   ├── postersProducts
-    │   │   ├── PosterProductsFn.ts
-    │   │   ├── PosterProductsStyle.ts
-    │   │   └── PostersProducts.tsx
     │   ├── products
-    │   │   ├── ProductsList.tsx
-    │   │   ├── ProductsPosts.tsx
-    │   │   └── ProductsPostsEdit.tsx
     │   ├── productsDetail
-    │   │   ├── ProductDetail.tsx
-    │   │   ├── style.ts
-    │   │   ├── supabase_Detail
-    │   │   │   └── supabaseAPI.ts
-    │   │   └── types.ts
     │   └── searchResults
-    │       ├── SearchResults.tsx
-    │       └── researchItem.ts
-    ├── react-app-env.d.ts
     ├── redux
-    │   ├── HowtoUseRedux.tsx
     │   ├── modules
-    │   │   ├── authSlice.ts
-    │   │   ├── countPostsAndItemsSlice.ts
-    │   │   ├── example.ts
-    │   │   ├── openForm.ts
-    │   │   ├── searchSlice.ts
-    │   │   └── tabSlice.ts
     │   ├── reduxHooks
-    │   │   └── reduxBase.ts
     │   └── store
-    │       └── store.ts
-    ├── reportWebVitals.ts
     ├── router
-    │   └── Router.tsx
     ├── service-worker.ts
     ├── serviceWorkerRegistration.ts
     ├── styles
-    │   ├── GlobalStyle.ts
-    │   ├── community
-    │   │   ├── CommentStyle.ts
-    │   │   ├── CommunityDetailStyle.ts
-    │   │   ├── CommunityListStyle.ts
-    │   │   ├── CommunityMainStyle.ts
-    │   │   └── CommunityWriteStyle.ts
-    │   ├── footerStyle
-    │   │   └── FooterStyle.ts
-    │   ├── headerStyle
-    │   │   └── HeaderStyle.ts
-    │   ├── loginStyle
-    │   │   └── LoginStyle.ts
-    │   ├── mainStyle
-    │   │   └── MainStyle.ts
-    │   ├── mypageStyle
-    │   │   ├── CommunityCardStyle.ts
-    │   │   ├── MyPageStyle.ts
-    │   │   ├── Nothing.ts
-    │   │   ├── ProductCardStyle.ts
-    │   │   ├── ProfileMobileNavStyle.ts
-    │   │   ├── ProfileStyle.ts
-    │   │   ├── QnAFormStyle.ts
-    │   │   └── TabsStyle.ts
-    │   ├── products
-    │   │   ├── productsList
-    │   │   │   ├── StProductsCard.ts
-    │   │   │   ├── StProductsCategory.ts
-    │   │   │   ├── StProductsList.ts
-    │   │   │   ├── StProductsNothing.ts
-    │   │   │   └── StProductsSkeleton.ts
-    │   │   └── productsPosts
-    │   │       ├── StProductsImageUpload.ts
-    │   │       ├── StProductsPosts.ts
-    │   │       └── StProductsWriteForm.ts
-    │   ├── searchresults
-    │   │   ├── Dropdown.tsx
-    │   │   └── SearchResultsStyle.ts
-    │   └── skeleton
-    │       └── Skeleton.ts
     └── util
-        └── getDate.ts
-
-
 
 <br>
 
