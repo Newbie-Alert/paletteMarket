@@ -72,7 +72,8 @@
 <br>
 
 ## 프로젝트 구조
-<span>
+
+```sh
 .
 ├── public
 └── src
@@ -121,7 +122,7 @@
     ├── serviceWorkerRegistration.ts
     ├── styles
     └── util
-</span>
+```
 
 <br>
 
