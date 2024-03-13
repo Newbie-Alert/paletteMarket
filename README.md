@@ -1,77 +1,91 @@
-Palette Market
+# 🎵 Mucation
 
-**Overview**
+## Overview
 
-🕗 개발기간: 2024. 1~ 2024. 2
+🕗 개발기간: 2023. 12. 4 ~ 2023. 12. 11  
 
-💻 배포 주소: https://palette-market-gold.vercel.app/
+💻 배포 주소: https://mucation-project.vercel.app
 
-**팀소개**
 
-이하빈:
-이락균: 
-김건우: 
-정혜원: 
-전지현: 
 
-**프로젝트 소개**
+<br/>
 
-미대생들과 미술을 취미로하는 사람들을 위해 미술용품들을 중고로 거래할 수 있고 미술을 주제로한 커뮤니티를 형성할 수 있는 서비스.
+## 팀소개
 
-**Stack**
+김범수: 
 
-**Environment**
+김은비: https://github.com/eunbime
 
-https://camo.githubusercontent.com/3050eb0eaa198382b6471520e8e211aa51bed0bfdcd032921b54234c678e268d/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4749542d4630353033323f7374796c653d666f722d7468652d6261646765266c6f676f3d476974266c6f676f436f6c6f723d7768697465
+김명섭: https://github.com/kms99
 
-https://camo.githubusercontent.com/406fa752b08f54382b62d982de16c84c279919d2126d7341afb1ee62860b1196/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4749544855422d3138313731373f7374796c653d666f722d7468652d6261646765266c6f676f3d476974487562266c6f676f436f6c6f723d7768697465
+시병택: https://github.com/BYEONGTAEK2023
 
-https://camo.githubusercontent.com/1fa76c009857b38677b2396d93d6b628e8826961bad5759cd1b2c1469fa1654b/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f56495355414c2053545544494f20434f44452d3030374143433f7374796c653d666f722d7468652d6261646765266c6f676f3d76697375616c73747564696f636f6465266c6f676f436f6c6f723d7768697465
+전지현: https://github.com/jihyun-j
 
-**Config**
+<br/>
 
-https://camo.githubusercontent.com/c9a531d2dbaffe493e0f4775aa969ebdd01b02e9118fc21d8be40643d5ff0eee/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4e504d2d4342333833373f7374796c653d666f722d7468652d6261646765266c6f676f3d4e504d266c6f676f436f6c6f723d7768697465
+## 프로젝트 소개
 
-https://camo.githubusercontent.com/c87e0961f49ae261447369c34df4d13dabf2aaf40be241ba971aa3cf7e2d170e/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f5941524e2d3243384542423f7374796c653d666f722d7468652d6261646765266c6f676f3d5961726e266c6f676f436f6c6f723d7768697465
+<aside>
+🎶 내가 원하는 장소에서 내가 좋아하는 음악(영상)을 공유해 보자!
 
-**Development**
+</aside>
 
-https://camo.githubusercontent.com/f921c8d9bca22d39a94ecd7f7c67c193aba8dfeac9e016377975e9621cbc12a3/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f48544d4c2d4533344632363f7374796c653d666f722d7468652d6261646765266c6f676f3d48544d4c35266c6f676f436f6c6f723d7768697465
+<br/>
 
-https://camo.githubusercontent.com/f366cee5da6d781ea9da27c69f6d773ea12afc4fd0a63bf2840a4ae643ccdb80/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4353532d3135373242363f7374796c653d666f722d7468652d6261646765266c6f676f3d43535333266c6f676f436f6c6f723d7768697465
+## Stack
 
-https://camo.githubusercontent.com/88f1c131582f337753d34b80494024ee6fb85ed4dfad8657d8d7925268a47ea0/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4a4156415343524950542d4637444631453f7374796c653d666f722d7468652d6261646765266c6f676f3d4a617661536372697074266c6f676f436f6c6f723d626c61636b
+### Environment
+ 
+<img src="https://img.shields.io/badge/GIT-F05032?style=for-the-badge&logo=Git&logoColor=white"/></a>
+<img src="https://img.shields.io/badge/GITHUB-181717?style=for-the-badge&logo=GitHub&logoColor=white"/></a>
+<img src="https://img.shields.io/badge/VISUAL STUDIO CODE-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white"/></a>
 
-https://camo.githubusercontent.com/8c7db807f16ee6de9905477138645ff14922394413d81ba5c796ef45b9dc6869/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f52656163742d3631444146423f7374796c653d666f722d7468652d6261646765266c6f676f3d5265616374266c6f676f436f6c6f723d626c61636b
+### Config
 
-**Database**
+<img src="https://img.shields.io/badge/NPM-CB3837?style=for-the-badge&logo=NPM&logoColor=white"/></a>
+<img src="https://img.shields.io/badge/YARN-2C8EBB?style=for-the-badge&logo=Yarn&logoColor=white"/></a>
 
-https://camo.githubusercontent.com/ef67a7d72cb8cf3e99afacde152431a79edbbff18516983ab7179028a4a5b09b/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f46495245424153452d4646434132383f7374796c653d666f722d7468652d6261646765266c6f676f3d4669726562617365266c6f676f436f6c6f723d626c61636b
+### Development
+<img src="https://img.shields.io/badge/HTML-E34F26?style=for-the-badge&logo=HTML5&logoColor=white"/></a>
+<img src="https://img.shields.io/badge/CSS-1572B6?style=for-the-badge&logo=CSS3&logoColor=white"/></a>
+<img src="https://img.shields.io/badge/JAVASCRIPT-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=black"/></a> 
+<img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=black"/></a>
 
-**API**
+### Database
 
-https://camo.githubusercontent.com/3dc9c39c46e1e08077ba15d0c7f23beb25c37902cc37c68df4dba008de18367b/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f594f55545542452d4646303030303f7374796c653d666f722d7468652d6261646765266c6f676f3d596f7574756265266c6f676f436f6c6f723d7768697465
+<img src="https://img.shields.io/badge/FIREBASE-FFCA28?style=for-the-badge&logo=Firebase&logoColor=black"/></a>  
 
-https://camo.githubusercontent.com/fa20a6358b076ff5ffb3e1d124caee5a3e8df3542640f21250b5fd78c7a59980/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4b414b414f204d41502d4646434430303f7374796c653d666f722d7468652d6261646765266c6f676f3d4b614b616f266c6f676f436f6c6f723d626c61636b
+### API
 
-**Communication**
+<img src="https://img.shields.io/badge/YOUTUBE-FF0000?style=for-the-badge&logo=Youtube&logoColor=white"/></a>
+<img src="https://img.shields.io/badge/KAKAO MAP-FFCD00?style=for-the-badge&logo=KaKao&logoColor=black"/></a>  
 
-https://camo.githubusercontent.com/588f04dc25a5bcb5870727112b0ea1815aa706641da86eb9d606f5da0387197e/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f534c41434b2d3441313534423f7374796c653d666f722d7468652d6261646765266c6f676f3d536c61636b266c6f676f436f6c6f723d7768697465
+### Communication
 
-https://camo.githubusercontent.com/c8820d740db3809eac6809b9da45c5178fdc41e97a6a433046a4a5c05b91ef93/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4e6f74696f6e2d3030303030303f7374796c653d666f722d7468652d6261646765266c6f676f3d4e6f74696f6e266c6f676f436f6c6f723d7768697465
+<img src="https://img.shields.io/badge/SLACK-4A154B?style=for-the-badge&logo=Slack&logoColor=white"/></a>
+<img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=Notion&logoColor=white"/></a>
+<img src="https://img.shields.io/badge/FIGMA-F24E1E?style=for-the-badge&logo=Figma&logoColor=white"/></a>
 
-https://camo.githubusercontent.com/62ed4461771068146f6284615bbe5dfc9c166351b1d3a1dd283ebeee27a8c73b/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4649474d412d4632344531453f7374796c653d666f722d7468652d6261646765266c6f676f3d4669676d61266c6f676f436f6c6f723d7768697465
 
-**화면구성**
+<br>
 
-- 로그인 / 회원가입
+## 화면구성
+
+- 로그인 /  회원가입
     - Firebase Authenticator를 이용해 구글, 깃허브 및 이메일과 비밀번호를 사용해 회원가입 및 로그인
+
+
 - 홈 - 지도 / 근처에서 공유된 영상들
     - 초기 위치는 내 위치로 지정하여 내 근처에서 공유된 영상 리스트를 볼 수 있음
     - 지도위에 마크된 위치에서 영상의 간단한 정보 보기 및 상세보기 이동 가능
+ 
+
 - 게시글 작성 페이지
     - 유튜브 API를 이용해 공유하고 싶은 영상을 가져와서 추가
     - 제목과 내용을 입력하고 공유하고 싶은 위치를 지정해서 게시글을 작성
+
+    
 - 게시글 상세보기
     - Firebase에 영상에대한 정보를 저장해 두고, 공유된 영상에 대한 정보를 볼 수 있음
     - 공유된 게시글이 현재 로그인된 사용자가 게시한 영상이면 수정 및 삭제가 가능 (권한부여)
@@ -79,15 +93,20 @@ https://camo.githubusercontent.com/62ed4461771068146f6284615bbe5dfc9c166351b1d3a
     - 내가 공유한 영상들 모아서 볼 수 있음
     - 내가 좋아하는 장르 추가 가능
 
-**주요기능**
+<br>
 
-**📌 위치를 지정해서 영상 공유 가능**
+## 주요기능
+
+### 📌 위치를 지정해서 영상 공유 가능
 
 - 내가 기억하고 싶은 장소 또는 공유하고 싶은 장소를 위치로 지정해 음악을 공유할 수 있어요
 
-**📌 내 근처에서 사람들과 함께 영상 시청 또는 감상**
+### 📌 내 근처에서 사람들과 함께 영상 시청 또는 감상
 
 - 내가 공유한 음악을 근처 사람들과 함께 들을 수 있어요
 - 특정 위치의 사람들과 음악을 공유할 수 있어요 (멀리 있지만 공감대 형성?)
 
+<br/>
+
 ## 📂 아키텍처
+
