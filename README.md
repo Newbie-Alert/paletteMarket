@@ -127,7 +127,7 @@
 
 ## 화면구성
 
-- 로그인 /  회원가입
+- 로그인 / 회원가입
     - Supabase Auth UI를 이용해 Kakao, Facebook, Google 소셜 로그인을 구현 함
 
 - 홈(메인) 페이지
