@@ -96,13 +96,12 @@
     │   ├── skeleton
     │   └── slider
     ├── layouts
-    │   ├── Footer.tsx
-    │   ├── Header copy.tsx
-    │   ├── Header.tsx
-    │   ├── Layout.tsx
-    │   ├── NotificationFn.ts
+    │   ├── Footer
+    │   ├── Header
+    │   ├── Layout
+    │   ├── NotificationFn
     │   ├── PrivateLayout
-    │   └── ScrollTopButton.tsx
+    │   └── ScrollTopButton
     ├── pages
     │   ├── chat
     │   ├── community
