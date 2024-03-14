@@ -174,3 +174,5 @@
 
 ## 📂 아키텍처
 
+<img width="947" alt="image" src="https://github.com/Newbie-Alert/paletteMarket/assets/134848062/0ce5e041-61ce-414c-8bd8-f4c27c6b05ad"/></a>
+
